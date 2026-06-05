@@ -1,0 +1,45 @@
+FinBank — INTERNAL POLICY
+Account Freeze & Unfreeze Rules
+Version: 2.4 | Last Updated: February 3, 2025 | Owner: Risk & Compliance Team
+
+1. OVERVIEW
+An account freeze restricts all or specific transactions on a customer account. This document defines freeze triggers, freeze types, and the process to restore account functionality. Agents must not manually freeze or unfreeze accounts without proper authorization level.
+
+2. TYPES OF FREEZES
+Full Freeze: All debits and credits blocked. Customer can view balance and statements but cannot transact.
+Debit Freeze: Only outgoing transactions blocked. Incoming credits (salary, refunds) continue to work.
+Credit Freeze: Only incoming transactions blocked. Customer can spend existing balance.
+
+3. AUTOMATIC FREEZE TRIGGERS
+
+3.1 Security Triggers
+- 3 consecutive failed PIN or MPIN attempts within 30 minutes → Debit freeze for 4 hours, auto-releases.
+- 5 consecutive failed PIN or MPIN attempts within 24 hours → Full freeze, requires manual unfreeze.
+- Login detected from new device in different city within 2 hours of last login → Debit freeze for 2 hours (precautionary, auto-releases).
+- OTP entered incorrectly 5 times in a single session → Full freeze for 24 hours.
+
+3.2 KYC Triggers
+- Tier 1 KYC expires after 12 months and customer has not re-verified → Debit freeze applied.
+- KYC re-verification attempted and failed twice within 30 days → Full freeze, manual compliance review required.
+- PAN-Aadhaar linking becomes invalid or unlinked post RBI deadline → Debit freeze until resolved.
+
+3.3 Regulatory and Compliance Triggers
+- Internal fraud model flags account (risk score above 85 out of 100) → Full freeze, compliance team reviews within 24 hours.
+- Rapid successive transfers to 5 or more new beneficiaries within 1 hour → 12-hour debit freeze, auto-releases if no further flags.
+- Court order or law enforcement directive received → Full freeze, requires legal team sign-off to unfreeze. No time limit.
+
+4. MANUAL FREEZE (AGENT-INITIATED)
+L2 and above agents can initiate a manual debit freeze on customer request, for example if the customer reports a lost or stolen phone. Process: CRM → Account Management → Initiate Freeze → Select Type → Log Reason. Duration: up to 30 days. Must be reviewed at the 15-day mark. L1 agents cannot initiate freezes; they must escalate to L2.
+
+5. UNFREEZE PROCESS
+Auto-releases (under 4 hours): Expire automatically, no agent action needed.
+PIN failure (5 attempts): Customer completes identity re-verification via Aadhaar OTP on registered mobile, or Video KYC. Freeze lifts within 30 minutes of successful verification.
+KYC expiry freeze: Customer completes re-KYC in-app. Freeze lifts within 30 minutes.
+Fraud-flagged full freeze: Compliance team must clear the flag. SLA is 48 hours from freeze initiation.
+Court order freeze: Cannot be unfrozen without written clearance from legal team.
+
+6. CUSTOMER COMMUNICATION
+All freeze events trigger an immediate SMS and in-app notification stating the freeze type and a general reason code. Specific fraud or investigation details are not disclosed in the notification. Customer can raise a support ticket directly from the freeze notification screen.
+
+7. EDGE CASES
+If account is frozen mid-transaction: the transaction rolls back and funds return to source within 2 business days. If a scheduled EMI debit hits a frozen account: EMI is marked as bounced and a ₹500 bounce charge is applied. Customer must raise a waiver request if the freeze was triggered by an error.

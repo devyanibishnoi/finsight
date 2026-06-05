@@ -1,0 +1,43 @@
+FinBank — INTERNAL POLICY
+KYC Re-Verification Policy
+Version: 1.9 | Last Updated: March 10, 2025 | Owner: Compliance Team
+
+1. OVERVIEW
+This policy governs the circumstances under which existing customers must complete a fresh KYC verification, the process for doing so, and the consequences of non-compliance. This aligns with RBI Master Direction on KYC (2016, as amended) which mandates periodic re-KYC for all regulated entities.
+
+2. RE-KYC TRIGGERS
+The following events require a customer to complete re-KYC:
+
+2.1 Periodic Re-KYC
+- Tier 1 (Minimum KYC) accounts: Re-KYC mandatory every 12 months from the date of original verification.
+- Tier 2 (Full KYC) Low Risk accounts: Re-KYC every 10 years.
+- Tier 2 (Full KYC) Medium Risk accounts: Re-KYC every 8 years.
+- Tier 2 (Full KYC) High Risk accounts (PEPs, high transaction volume): Re-KYC every 2 years.
+
+2.2 Event-Based Re-KYC
+- Customer changes registered mobile number.
+- Customer requests address change to a different state.
+- Transaction pattern changes significantly (>5x average monthly volume for 3 consecutive months).
+- Customer is flagged by the internal risk model.
+- PAN-Aadhaar linking status becomes invalid.
+- Customer adds a new beneficiary outside India.
+
+3. RE-KYC PROCESS
+Step 1: Customer receives in-app notification and SMS 30 days before the re-KYC deadline.
+Step 2: Reminder sent again at 15 days and 7 days before deadline.
+Step 3: On the deadline date, a debit freeze is applied if re-KYC is not completed.
+Step 4: Customer completes re-KYC via in-app Video KYC or Aadhaar OTP-based verification.
+Step 5: Verification processed within 30 minutes for automated checks, up to 24 hours for manual review cases.
+Step 6: Upon successful re-KYC, the freeze is lifted and account is restored to previous state.
+
+4. CONSEQUENCES OF RE-KYC FAILURE
+First failure: System notifies customer and allows one immediate retry.
+Second failure within 30 days: Account is placed under full freeze. Customer must contact support for manual re-KYC via a scheduled video call with a KYC officer. This process takes 3–5 business days.
+Three failures within 30 days: Account is escalated to the Compliance team. Account may be downgraded to Tier 0 with severely restricted functionality pending full manual re-KYC completion.
+Refusal to complete re-KYC within 60 days of freeze: Account is flagged for closure as per RBI guidelines. Customer is notified 30 days in advance of closure. Any remaining balance is refunded to the customer's registered bank account on file.
+
+5. WHAT RE-KYC DOES NOT RESET
+Re-KYC completion does not reset transaction history, beneficiary list, or UPI ID. It does not affect EMI schedules or auto-pay mandates. It does not change the customer's KYC tier unless specifically upgraded.
+
+6. AGENT GUIDANCE
+L1 agents can guide customers through the in-app re-KYC flow. L1 agents cannot override a re-KYC block. If a customer claims the re-KYC flow is broken or inaccessible, escalate to L2. For manual re-KYC scheduling (post second failure), only L2 agents can initiate the scheduling workflow in CRM.

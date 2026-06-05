@@ -1,0 +1,57 @@
+FinBank — INTERNAL POLICY
+Refund Policy
+Version: 2.7 | Last Updated: December 20, 2024 | Owner: Customer Experience Team
+
+1. OVERVIEW
+This policy covers all scenarios in which a customer is entitled to a refund and defines the process, timeline, and mode of refund for each scenario. Refunds are categorized into system-initiated auto-refunds and agent-initiated manual refunds.
+
+2. FAILED TRANSACTION REFUNDS (AUTO-REFUND)
+
+2.1 UPI Failures
+If a UPI transaction fails after money is debited, the system initiates an auto-reversal. Timeline:
+- NPCI confirms failure within 1 hour: Refund credited within T+1 business day.
+- NPCI status remains pending: Refund within T+5 business days.
+- If not credited by T+5: Customer must raise a support ticket. Manual refund processed within 7 business days.
+Refund mode: Credit to the same UPI-linked account from which the debit occurred.
+
+2.2 IMPS / NEFT Failures
+If beneficiary bank rejects the transfer: Funds auto-return within T+1 (IMPS) or T+2 (NEFT).
+If transfer is stuck in pending: Customer raises ticket after 4 hours (IMPS) or 2 business days (NEFT). Trace request raised. Resolution within 5 business days.
+Refund mode: Credit back to originating FinBank account.
+
+2.3 Card Payment Failures
+If merchant terminal times out and debit occurs: Auto-reversal typically within T+1 by payment network.
+If not reversed by T+3: Customer raises ticket. Manual investigation and refund within 10 business days.
+
+3. MERCHANT REFUNDS
+
+3.1 Merchant-Initiated Refunds
+When a merchant initiates a refund for returned goods or cancelled orders:
+- Expected timeline per merchant: typically 5–7 business days.
+- Timeline for credit to appear in FinBank account after merchant initiates: 2–3 business days.
+- If refund not received within 10 business days of merchant confirmation: Customer raises ticket. FinBank follows up with payment network. Resolution within 7 additional business days.
+
+3.2 Merchant Disputes (FinBank-Initiated Chargeback)
+When FinBank raises a chargeback on customer's behalf (unauthorized transaction or non-delivery of goods):
+- Chargeback process takes 30–60 calendar days.
+- Provisional credit at FinBank's discretion for amounts above ₹5,000 pending chargeback resolution.
+- If chargeback is decided against the customer, provisional credit is reversed. Customer is notified 3 days in advance.
+
+4. SERVICE FEE REFUNDS
+Incorrectly charged service fees: Refund processed within 2 business days of agent verification.
+Annual fee refund for account closure within 30 days: Full refund. After 30 days: Pro-rated refund (not available after 6 months of charge date).
+
+5. REFUND MODES
+Refunds are always credited to the original payment source:
+- Debited from FinBank account → Credited to same FinBank account.
+- Debited from external bank via UPI → Credited back to same external bank account.
+- FinBank does not issue refunds as cash, cheque, or to a different account than the source.
+
+6. REFUNDS FinBank CANNOT PROCESS
+- Transactions sent to a wrong beneficiary due to customer error (wrong UPI ID or account number).
+- Transactions older than 180 days (6 months) from the transaction date.
+- Refund requests for transactions marked as settled and undisputed for more than 90 days.
+- Transactions where the customer voluntarily authorized the payment, unless fraud is proven.
+
+7. AGENT GUIDANCE
+L1 agents can process refunds up to ₹5,000 without additional approval. For refunds between ₹5,000 and ₹50,000, L2 approval is required. For refunds above ₹50,000, Finance team sign-off is mandatory.

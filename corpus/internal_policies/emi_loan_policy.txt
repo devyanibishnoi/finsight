@@ -1,0 +1,51 @@
+FinBank — INTERNAL POLICY
+EMI & Personal Loan Policy
+Version: 3.1 | Last Updated: March 5, 2025 | Owner: Lending Team
+
+1. OVERVIEW
+FinBank offers instant personal loans and EMI conversion on select transactions to eligible customers. This document defines eligibility criteria, loan terms, EMI rules, bounce charges, prepayment, and foreclosure policies. All lending is governed by RBI Master Directions on Digital Lending (2025).
+
+2. LOAN ELIGIBILITY
+Minimum account age: 3 months.
+KYC requirement: Tier 2 (Full KYC) only.
+Minimum credit score: 650 (checked at time of application).
+No active loan default or NPA status on any existing credit.
+Resident Indian only (NRI accounts ineligible for unsecured loans).
+
+3. LOAN PARAMETERS
+Loan amounts: ₹5,000 to ₹5,00,000.
+Tenure: 3, 6, 9, 12, 18, or 24 months.
+Interest rate: 14% to 26% per annum (reducing balance method), based on credit profile.
+Processing fee: 1% to 2% of loan amount, deducted upfront from disbursed amount.
+Disbursement: Instant to FinBank account after digital agreement signing. Typically within 5 minutes.
+
+4. EMI DEBIT SCHEDULE
+EMI is auto-debited from the customer's FinBank account on the due date (selected at loan origination).
+If the due date falls on a bank holiday or weekend, debit happens on the next working day.
+SMS and in-app reminder sent 3 days before each EMI due date.
+
+5. EMI BOUNCE POLICY
+First bounce: ₹500 bounce charge applied. FinBank retries the debit after 48 hours once.
+Second bounce in the same month: Additional ₹500 charge. Loan marked as Special Mention Account (SMA-0).
+Two consecutive months of EMI bounce: Loan classified as NPA (Non-Performing Asset). Recovery process initiated. Customer's credit score is impacted. Future loan eligibility suspended until the loan is settled.
+If account has insufficient funds at time of debit, FinBank does not allow EMI debit to create a negative balance. The debit simply fails and is treated as a bounce.
+
+6. PREPAYMENT POLICY
+Partial prepayment: Allowed after 3 EMIs have been paid. Minimum prepayment amount: ₹1,000. No prepayment penalty.
+Partial prepayment reduces the outstanding principal. Customer can choose to reduce EMI amount or reduce tenure (in-app selection).
+Full prepayment (foreclosure): Allowed at any time. Foreclosure fee: 2% of outstanding principal for loans closed within the first 6 months. Nil foreclosure fee after 6 months.
+Foreclosure processing: In-app → Loan → Foreclose Loan → Pay outstanding amount + fee. Loan closure certificate issued within 3 business days.
+
+7. LATE PAYMENT INTEREST
+If EMI is not paid within 7 days of due date: Late payment interest of 2% per month (24% per annum) on the overdue amount is applied, in addition to the bounce charge.
+
+8. LOAN CANCELLATION
+Cooling off period: Customer may cancel the loan within 3 days of disbursement (as per RBI Digital Lending Directions, 2025). Cancellation requires repayment of full disbursed amount plus pro-rated interest for days used. Processing fee is not refunded.
+
+9. LOAN STATEMENT
+Monthly loan statements available in-app and via email. Statement includes: outstanding principal, EMIs paid, EMIs remaining, interest paid to date, foreclosure amount.
+
+10. AGENT GUIDANCE
+L1 agents can share loan status, upcoming EMI details, and guide customers to in-app prepayment/foreclosure flows.
+L1 agents cannot waive bounce charges (requires L2 approval, limited to one waiver per loan lifetime).
+L1 agents cannot restructure loans. Restructuring requests must go to the Lending team (L3).

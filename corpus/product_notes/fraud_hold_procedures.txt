@@ -1,0 +1,42 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Fraud Flag & Account Hold — Internal Procedures
+Author: Vikram Nair, Head of Risk
+Date: March 5, 2025
+Audience: L2 and L3 support agents, Compliance team
+
+This note explains how our fraud detection system works and the exact procedure when an account is put on hold. Do not share the scoring thresholds externally.
+
+HOW THE FRAUD SCORING WORKS
+Our risk model runs a transaction-level score (0–100) and an account-level score (0–100) using behavioral patterns. Transaction score above 90 triggers an immediate card block for 2 hours. Account score above 85 triggers a full account freeze for compliance review.
+
+Inputs to the model include (not exhaustive):
+- Transaction velocity (number of transactions in a short window)
+- Geographic anomalies (transaction in a city far from usual activity)
+- Beneficiary patterns (new beneficiary + large amount)
+- Device change + high-value transaction within 24 hours
+- Time-of-day anomalies (unusually large transaction at 3 AM)
+
+WHAT HAPPENS WHEN AN ACCOUNT IS FRAUD-FLAGGED
+Step 1: Automated full freeze applied. Customer receives SMS: "Your account has been temporarily restricted. Contact support for assistance." Note: we do not tell the customer why in the initial SMS for security reasons.
+Step 2: Automated internal alert raised to the Compliance team queue. SLA: Compliance must start review within 4 hours.
+Step 3: Compliance analyst reviews transaction history, risk score breakdown, and device/location data.
+Step 4: Decision path:
+  - False positive (no fraud found): Freeze lifted. Customer gets in-app notification. Account restored fully. No record of fraud on the customer profile.
+  - Suspected fraud confirmed: Account remains frozen. L3 agent calls the customer for identity confirmation and to verify the disputed transactions. Customer has 48 hours to respond.
+  - No response in 48 hours: Account moved to "Under Investigation" status. Transactions above a threshold are reported to FIU-IND as required by the Prevention of Money Laundering Act (PMLA).
+
+WHAT AGENTS CAN AND CANNOT DO
+L1 agents: Can tell the customer their account has been temporarily restricted and that the review team will contact them. Cannot share the fraud score or the reason for the flag. Cannot lift the freeze.
+L2 agents: Can view the fraud flag reason in CRM (masked for most sensitive triggers). Can add notes to the compliance review ticket. Cannot override a fraud-triggered freeze.
+L3 / Compliance: Full access. Can clear the flag, confirm fraud, escalate to FIU-IND.
+
+HOW LONG A FRAUD REVIEW TAKES
+Target SLA: Decision within 48 hours of freeze.
+Actual average (Q4 2024 data): 18 hours for straightforward false positives. 52 hours for confirmed fraud cases requiring FIU reporting.
+If SLA is breached: L3 lead must be notified. Customer compensated per the SLA breach policy (₹100 per day of breach).
+
+PROVISIONAL CREDIT DURING FRAUD INVESTIGATION
+For unauthorized transaction disputes above ₹5,000, Compliance can issue a provisional credit to the customer while the investigation is ongoing. This is at the Compliance analyst's discretion. Provisional credit is reversed if investigation concludes the transaction was authorized.
+
+REPEAT FRAUD FLAGS ON THE SAME ACCOUNT
+If an account is fraud-flagged more than twice in a 90-day period, it is automatically escalated for Enhanced Due Diligence (EDD). EDD involves a manual review of all transactions in the past 6 months. Account may be exited (closed with balance refunded) if EDD finds policy violations.

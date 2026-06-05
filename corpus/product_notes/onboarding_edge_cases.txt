@@ -1,0 +1,37 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Onboarding Drop-Off Edge Cases
+Author: Meera Pillai, Product Lead (Growth & Onboarding)
+Date: February 5, 2025
+Audience: Support team, Growth team
+
+---
+
+Onboarding has been one of our biggest drop-off sources. Support gets a lot of tickets from customers stuck mid-onboarding. This note covers the top edge cases.
+
+EDGE CASE 1: Customer registered but never received OTP
+Common cause: Mobile number not registered with Aadhaar, or customer is using a VoIP number (not accepted).
+Fix: OTPs are sent to the mobile number entered during registration. If customer doesn't receive it within 2 minutes, they should check if: the number is active, they have signal, the number is registered with their Aadhaar. VoIP numbers (apps like Google Voice, Truecaller virtual numbers) are not accepted. Only SIM-based numbers registered in India.
+Agent action: L1 can re-trigger the OTP once. If it fails again, ask the customer to use their Aadhaar-registered number.
+
+EDGE CASE 2: Customer completed registration but gets "Account under review" for days
+This happens for customers flagged by our onboarding risk model (typically: VPN usage during registration, name matching a watchlist, or device previously used for a rejected application).
+Actual review time: 24–48 hours by the Compliance team.
+What to tell the customer: "Your account is under a standard verification review, which typically takes 24–48 hours. You will be notified on your registered mobile number once the review is complete."
+Do NOT tell them it's related to a watchlist match. Do NOT promise it will be approved.
+
+EDGE CASE 3: Customer says they already have an account but forgot details
+If a customer tries to register with an existing Aadhaar and gets an error, it means an account already exists with that Aadhaar. One Aadhaar = one FinBank account (mandatory, per RBI).
+Fix: Guide the customer to account recovery. Go to login screen → Forgot Account → enter Aadhaar number → verify with OTP. If they've also lost the mobile number, this becomes an L2 manual recovery case.
+
+EDGE CASE 4: Name in FinBank account doesn't match the customer's other accounts
+FinBank takes the name directly from Aadhaar at the time of onboarding. If the Aadhaar name is a shortened or different version of the customer's legal name, it propagates to the FinBank account.
+This matters for: Salary credits (employer may send a different name), NEFT to FinBank account (some banks do name matching), and nominee records.
+Fix: Customers should update their name on Aadhyo to fix the root cause. Alternatively, L2 can note the alternate name in the customer profile for matching purposes. We do not change the FinBank display name to something different from Aadhaar without compliance review.
+
+EDGE CASE 5: NRI customers trying to open an account
+FinBank does not currently support NRI savings accounts (NRE/NRO). Non-resident Indians attempting to onboard will be blocked at the address verification stage (Indian address required) or at the Aadhaar step (Aadhaar requires Indian residency).
+What to tell them: FinBank is for Indian residents only at this time. NRI banking features are on the 2025 roadmap.
+
+EDGE CASE 6: Video KYC fails due to poor network on the customer's end
+Video KYC requires a stable internet connection of at least 1 Mbps. If the call drops mid-verification, the session is marked as "Incomplete" (not Failed). Incomplete sessions do not count toward the 2-failure limit.
+Fix: Ask customer to retry on a stable WiFi connection. The Video KYC session can be rescheduled up to 3 times per day. After 3 incomplete sessions in one day, the customer must retry the next day.

@@ -1,0 +1,43 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Q1 2025 Policy and Limit Updates — What's Changed
+Author: Neha Joshi, Policy & Compliance Lead
+Date: March 20, 2025
+Audience: All support staff, product team
+
+---
+
+This memo summarizes all policy and limit changes that took effect in Q1 2025 (January–March 2025). Please update your mental model accordingly and stop referencing the old values.
+
+1. UPI COOLING PERIOD FOR NEW ACCOUNTS — EFFECTIVE MARCH 1, 2025
+NPCI issued a circular in February 2025 requiring all payment apps to impose a cooling period on new UPI accounts. Effective March 1, 2025, all accounts registered on FinBank within the last 24 hours are limited to ₹5,000 per UPI transaction and ₹10,000 per day. This applies regardless of KYC tier.
+OLD LIMIT: No cooling period for KYC-verified accounts.
+NEW LIMIT: ₹5,000 / ₹10,000 for first 24 hours, regardless of KYC status.
+
+2. IMPS FEE REMOVAL — EFFECTIVE JANUARY 1, 2025
+We removed the IMPS transaction fee for amounts up to ₹1,00,000. This was previously ₹5 per transaction.
+OLD: ₹5 fee for IMPS up to ₹1,00,000.
+NEW: Free for all IMPS up to ₹1,00,000. Fee of ₹15 only for amounts above ₹1,00,000.
+
+3. ANNUAL DEBIT CARD FEE WAIVER THRESHOLD CHANGE — EFFECTIVE FEBRUARY 1, 2025
+The waiver condition for the ₹199 annual debit card fee was changed.
+OLD: Waived if annual card spending exceeded ₹25,000.
+NEW: Waived if annual card spending exceeds ₹50,000.
+This affects renewal cycles. Customers who renewed before February 1, 2025 are on the old threshold for their current year.
+
+4. EMI FORECLOSURE FEE WAIVER PERIOD EXTENDED — EFFECTIVE JANUARY 15, 2025
+OLD: 2% foreclosure fee within the first 3 months. No fee after 3 months.
+NEW: 2% foreclosure fee within the first 6 months. No fee after 6 months.
+This change applies only to loans disbursed on or after January 15, 2025. Older loans remain on the old 3-month rule.
+
+5. INTERNATIONAL TRANSACTION DAILY LIMIT INCREASE — EFFECTIVE MARCH 15, 2025
+OLD: ₹75,000 combined international daily limit.
+NEW: ₹1,00,000 combined international daily limit (all international channels combined).
+This brings us in line with peer neobanks and aligns with the revised LRS framework.
+
+6. DORMANCY FEE CAP INTRODUCED — EFFECTIVE FEBRUARY 1, 2025
+A customer reported that their dormant account balance was being entirely consumed by dormancy fees (a small-balance account edge case). We introduced a cap.
+OLD: ₹100 per quarter, no cap.
+NEW: ₹100 per quarter, capped at 25% of account balance. So a customer with ₹200 balance will be charged max ₹50 per quarter, not ₹100.
+
+7. WHAT HAS NOT CHANGED
+UPI per-transaction limits (₹1,00,000 for Tier 2), account maintenance fee (still zero), wallet load limits, re-KYC timelines, and the dispute resolution SLAs are all unchanged in Q1 2025.

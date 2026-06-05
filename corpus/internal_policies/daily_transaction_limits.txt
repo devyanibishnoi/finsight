@@ -1,0 +1,60 @@
+FinBank — INTERNAL POLICY
+Daily & Per-Transaction Limits by KYC Tier
+Version: 3.2 | Last Updated: January 15, 2025 | Owner: Risk & Compliance Team
+
+1. OVERVIEW
+This document defines transaction limits applicable to customer accounts based on their KYC verification tier. All limits are per-customer per-calendar-day unless stated otherwise. These limits comply with RBI Master Directions on KYC (2016, amended) and NPCI UPI guidelines.
+
+2. KYC TIER DEFINITIONS
+Tier 0 (No KYC): Account created but no KYC documents submitted. Access to basic features only.
+Tier 1 (Minimum KYC): OTP-based Aadhaar verification completed. Valid for 12 months from completion date.
+Tier 2 (Full KYC): Video KYC or in-person KYC completed with PAN + Aadhaar. No expiry unless re-KYC is triggered by a regulatory event.
+
+3. UPI TRANSACTION LIMITS
+Tier 0:
+- Per transaction: ₹500
+- Daily limit: ₹2,000
+- Monthly limit: ₹5,000
+
+Tier 1:
+- Per transaction: ₹25,000
+- Daily limit: ₹50,000
+- Monthly limit: ₹2,00,000
+
+Tier 2:
+- Per transaction: ₹1,00,000 (₹2,00,000 for select categories: hospitals, education institutions, insurance premiums)
+- Daily limit: ₹1,00,000
+- Monthly limit: No cap, subject to available account balance
+
+New UPI ID Cooling Period: For accounts less than 24 hours old, UPI transactions are capped at ₹5,000 per transaction and ₹10,000 per day regardless of KYC tier. This cooling period is mandatory per NPCI circular dated March 2024.
+
+4. NEFT LIMITS
+Tier 0: Not available.
+Tier 1: ₹25,000 per transaction | ₹50,000 daily.
+Tier 2: No per-transaction cap (per RBI directive) | ₹10,00,000 daily as internal safeguard.
+NEFT operates 24x7. Transactions initiated between 11 PM and 6 AM are batched for processing and reflect in beneficiary accounts by 8 AM next day.
+
+5. IMPS LIMITS
+Tier 0: Not available.
+Tier 1: ₹25,000 per transaction | ₹50,000 daily.
+Tier 2: ₹5,00,000 per transaction | ₹10,00,000 daily.
+IMPS is available 24x7 including holidays. Settlement is near-instant (typically under 30 seconds).
+
+6. DEBIT CARD LIMITS
+ATM Withdrawals:
+- Tier 1: ₹10,000 per day
+- Tier 2: ₹25,000 per day
+POS / Online Transactions:
+- Tier 1: ₹25,000 per day
+- Tier 2: ₹1,00,000 per day
+
+7. PREPAID WALLET
+Min KYC Wallet: Balance cap ₹10,000 | Monthly load limit ₹10,000.
+Full KYC Wallet: Balance cap ₹2,00,000 | Monthly load limit ₹2,00,000.
+Wallet-to-bank transfers allowed only for Full KYC accounts.
+
+8. TEMPORARY LIMIT ENHANCEMENT
+Customers may request a temporary limit enhancement via in-app support. Requests reviewed by the Risk team within 2 business days. Maximum enhancement: 2x standard Tier 2 limit, valid for 7 calendar days. Not available for Tier 0 accounts. Not available more than twice per calendar year.
+
+9. BREACH HANDLING
+Exceeding daily limits causes transaction decline, not account block. Three consecutive declined transactions within 1 hour triggers a temporary 4-hour transaction hold. Customer is notified via SMS and in-app push notification immediately.

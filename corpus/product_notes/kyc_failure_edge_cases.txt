@@ -1,0 +1,33 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: KYC Failure Edge Cases & Handling
+Author: Priya Menon, Product Lead (Compliance)
+Date: February 10, 2025
+Audience: Support leads, L2/L3 agents, QA team
+
+---
+
+This note documents edge cases we've encountered in KYC verification that are not fully covered by the standard KYC policy doc. Share this with your team.
+
+CASE 1: Name mismatch between Aadhaar and PAN
+Very common. Customer's Aadhaar has their name as "Rahul Kumar" but PAN says "Rahul Kumar Singh". Our system flags this and blocks Tier 2 upgrade.
+Current fix: L2 agent can manually review the documents side by side. If the name mismatch is minor (abbreviated middle name, missing suffix) and all other details match (DOB, address), L2 can approve the Tier 2 upgrade with a manual override in CRM. Log reason clearly.
+What NOT to do: Don't ask the customer to "update" their Aadhaar. That's a 2–3 week process. Use the manual override where appropriate.
+
+CASE 2: OTP not received on registered mobile during Video KYC
+Happens more with customers on Jio/BSNL networks in Tier 2/3 cities. The Aadhaar OTP goes to telecom provider but delivery is delayed by 5–10 minutes.
+Fix: Advise customer to wait 10 minutes before retrying. Do not count this as a failed KYC attempt in the system. Use the "OTP delivery issue" flag in CRM to mark the session. Retry attempts due to OTP delay should not penalize the customer's 2-failure-in-30-days counter.
+
+CASE 3: Customer completes Video KYC but agent marks as failed due to poor lighting
+This has been raised by customers multiple times. They redo a successful call but it still shows as a failure in their history.
+Fix: Video KYC sessions where the failure reason is "environmental" (lighting, connectivity) can be marked as "technical failure" rather than "KYC failure" by the reviewing agent. This matters because the 2-failure-in-30-days rule that triggers a full freeze should only count genuine identity verification failures, not technical issues.
+Engineering is working on a fix to auto-detect technical failures. Until then, agents must flag these manually.
+
+CASE 4: Customer uses a family member's registered mobile number
+Sometimes two family members share a mobile number. Only one of them can complete Aadhaar OTP-based KYC with that number. The second one fails.
+Fix: The second customer must use their own mobile number registered with Aadhaar. If not available, they must do in-person KYC at a partner banking point. We cannot accept a family member's number as a proxy.
+
+CASE 5: Aadhaar details locked by customer via UIDAI
+Some privacy-conscious customers lock their Aadhaar biometrics. OTP-based verification still works, but biometric verification fails.
+Fix: For customers with locked Aadhaar, route them to OTP-based verification only. Video KYC with OTP is fully valid. Biometric failure in this case is NOT a KYC failure.
+
+ESCALATION NOTE: Any case not covered above should be escalated to the Compliance team with a full description. Do not make judgment calls outside these documented cases.

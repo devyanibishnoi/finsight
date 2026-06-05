@@ -1,0 +1,50 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Card Replacement — Process Clarifications and Known Issues
+Author: Karan Mehta, Product Lead (Cards)
+Date: January 30, 2025
+Audience: Support team
+
+---
+
+We've been seeing inconsistent handling of card replacement requests. This note clarifies the process and covers edge cases.
+
+STANDARD CARD REPLACEMENT
+When a customer blocks their card (lost, stolen, or damaged), a replacement is initiated automatically. A virtual card is issued immediately and can be used for online transactions right away. A physical card is dispatched within 2 business days via our card fulfillment partner.
+
+Delivery timelines (from dispatch, not from request):
+- Metro cities (Mumbai, Delhi, Bengaluru, Chennai, Hyderabad, Pune, Kolkata): 5–7 business days.
+- Tier 2 cities: 7–10 business days.
+- Tier 3 and rural areas: 10–14 business days.
+Customers often confuse dispatch date with request date. Set expectations correctly.
+
+REPLACEMENT FEE POLICY
+First replacement per calendar year: Free for Tier 2 accounts.
+Subsequent replacements in the same calendar year: ₹200 per replacement.
+Tier 1 accounts: ₹200 for every replacement (no free replacement).
+Fee waiver: L2 can approve a fee waiver for a second replacement in the same year if the first replacement was due to a FinBank error (e.g., defective card issued). Log the waiver reason clearly.
+
+EMERGENCY CARD DELIVERY
+Available in Mumbai, Delhi, Bengaluru, Chennai, Hyderabad only (as of January 2025).
+Delivery: 24–48 hours from the time of request.
+Fee: ₹500 in addition to the standard replacement fee.
+How to initiate: In-app → Cards → Request Replacement → Emergency Delivery. L1 agents can also initiate via CRM if the customer cannot access the app.
+Note: Emergency delivery is not available if the standard card has already been dispatched for that replacement. You cannot upgrade to emergency delivery after the standard card is in transit.
+
+WHAT HAPPENS TO AUTO-PAY MANDATES ON THE OLD CARD
+This is the most common follow-up complaint after card replacement. All auto-pay and standing instruction mandates linked to the old card number are NOT automatically transferred to the new card. The customer must manually update their card number with each merchant or subscription service.
+What agents can do: Provide the customer with a list of active mandates we have on record (check CRM → Cards → Auto-Pay Mandates). We cannot contact merchants on behalf of the customer.
+
+CARD DELIVERED BUT NOT ACTIVATING
+If a customer receives their physical card but activation is failing:
+Common reasons:
+1. Customer is entering the wrong last 4 digits of the old card instead of the new card.
+2. Aadhaar OTP is not matching (registered mobile changed after card was requested).
+3. Card arrived damaged — unusual but happens. Check for visible damage.
+Fix for 1 and 2: Walk customer through in-app activation with the correct card details. For a damaged card: initiate an immediate free replacement, log as defective card. Report to card fulfillment partner via the defective card tracker in CRM.
+
+VIRTUAL CARD FOR ONLINE TRANSACTIONS DURING PHYSICAL CARD TRANSIT
+Customers often don't realize the virtual card was issued when they blocked their card. Remind them:
+- Virtual card is available in-app under Cards → Virtual Card.
+- CVV refreshes every 24 hours for security.
+- Can be used for all online and in-app payments.
+- Cannot be used at ATMs or physical POS terminals.

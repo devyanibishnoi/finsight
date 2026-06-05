@@ -1,0 +1,63 @@
+FinBank — INTERNAL POLICY
+Fee Schedule
+Version: 4.2 | Last Updated: March 1, 2025 | Owner: Finance & Product Team
+
+1. OVERVIEW
+This document lists all fees and charges applicable to FinBank account holders. All fees are inclusive of applicable GST unless stated otherwise. This schedule is effective from April 1, 2025. Previous fee schedules are archived in the Compliance portal.
+
+2. ACCOUNT MAINTENANCE FEES
+Savings Account (Tier 2): Zero monthly maintenance fee as long as the monthly average balance is above ₹0 (no minimum balance required).
+Dormancy fee: ₹100 per quarter after 12 months of inactivity (capped at 25% of account balance).
+
+3. TRANSACTION FEES
+
+UPI Transactions:
+- P2P (person to person): Free, no limit on number of free transactions.
+- P2M (merchant payments): Free.
+
+NEFT:
+- Online (in-app): Free.
+- Branch-based (via partner bank): ₹2 to ₹25 depending on amount (charged by partner bank, not FinBank).
+
+IMPS:
+- Up to ₹1,000: Free.
+- ₹1,001 to ₹1,00,000: Free (FinBank waives the standard IMPS fee as of April 2024).
+- Above ₹1,00,000: ₹15 per transaction.
+
+4. DEBIT CARD FEES
+Physical card issuance: Free (one-time at account opening).
+Annual debit card fee: ₹199 per year from year 2 onwards (first year free).
+Annual fee waiver condition: Waived if total annual card spending exceeds ₹50,000 in the previous year.
+Card replacement (lost/stolen/damaged): ₹200 per replacement. First replacement free per calendar year for Tier 2 accounts.
+Emergency card delivery: ₹500 additional (above standard ₹200 fee).
+ATM withdrawal (FinBank partner ATMs): Free, unlimited.
+ATM withdrawal (other bank ATMs in India): 5 free per month, ₹20 per transaction beyond 5.
+ATM withdrawal abroad: ₹500 per transaction (plus forex markup).
+
+5. FOREX CHARGES
+Forex markup on international transactions: 2.5% of transaction amount.
+Cross-currency conversion: Done at Visa/Mastercard settlement rate (T+2). Rate may differ from the transaction date rate.
+TCS on international spends above ₹7,00,000 per year: 20% (collected on the excess amount, credited to customer's Form 26AS).
+
+6. LOAN AND EMI FEES
+Personal loan processing fee: 1% to 2% of loan amount (deducted from disbursed amount).
+EMI bounce charge: ₹500 per bounce.
+Late payment interest: 2% per month on overdue amount.
+Foreclosure fee (within 6 months of disbursal): 2% of outstanding principal.
+Foreclosure fee (after 6 months): Nil.
+Loan NOC / closure certificate: Free (issued within 3 business days of full repayment).
+
+7. WALLET FEES
+Wallet load: Free.
+Wallet-to-bank transfer (Full KYC wallet): Free.
+Wallet closure: Free (balance refunded to linked bank account).
+
+8. MISCELLANEOUS FEES
+Account statement (beyond 3 months via in-app): Free in-app. ₹50 for PDF emailed for older statements.
+Duplicate passbook / records: Not applicable (digital account).
+Cheque book: Not offered (digital-only bank).
+NACH mandate registration: Free.
+NACH bounce charge: ₹500 per bounce (auto-debit mandate failure).
+
+9. FEE REVISION POLICY
+FinBank reserves the right to revise fees with a minimum 30-day advance notice to customers via in-app notification, email, and updated fee schedule on the website. Customers who do not accept revised fees may close their account within the notice period without any penalty.

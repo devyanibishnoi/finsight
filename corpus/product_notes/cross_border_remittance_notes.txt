@@ -1,0 +1,36 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Cross-Border Remittance — What We Support and What We Don't
+Author: Rohan Verma, Product Lead (International)
+Date: December 15, 2024
+Audience: Support team
+
+---
+
+We get a lot of confused tickets about what FinBank supports for international money transfers. This note is the definitive guide. Please stop guessing and refer here.
+
+WHAT FinBank CURRENTLY SUPPORTS (OUTWARD REMITTANCE FROM INDIA)
+1. FinBank does not offer outward international remittance directly. We do not have an SWIFT/wire transfer feature. Customers who want to send money abroad cannot do it from FinBank.
+2. FinBank's debit card can be used for international card transactions (online purchases, travel) once international transactions are enabled. This is card-based forex spending, not remittance.
+3. The LRS (Liberalised Remittance Scheme) limit of USD 2,50,000 per financial year applies to all international card spends.
+
+WHY WE DON'T SUPPORT OUTWARD REMITTANCE YET
+Per RBI Master Directions on PPIs, a non-bank PPI issuer (which is our current licensing status) cannot offer outward remittance. Outward remittance requires either an AD-I (Authorised Dealer Category I) bank licence or a tie-up with an AD-I bank. We are in the process of obtaining our banking licence upgrade. Until then, refer customers to established remittance services.
+
+WHAT ABOUT UPI FOR INTERNATIONAL PAYMENTS?
+UPI is currently available for outward payments to:
+- UAE (specific banks, via NPCI-AANI corridor).
+- Singapore (PayNow-UPI corridor).
+- Bhutan (DrukPay-UPI corridor).
+These are available only for Tier 2 customers and are limited to ₹60,000 equivalent per transaction (NPCI limit for international UPI corridors).
+No other countries are currently supported via UPI, despite what you may have read in the news. The RBI approvals are issued per-corridor and are not blanket.
+
+INWARD REMITTANCE (MONEY COMING INTO INDIA)
+FinBank accounts can receive inward remittances from abroad. If a customer's family is sending money from a foreign country to their FinBank account, this is supported via SWIFT/NEFT through our partner bank. The customer should share their IFSC code and account number. Note: FinBank accounts don't have their own IFSC. The inward remittance IFSC is that of our partner bank (currently: HDFC Bank, IFSC: HDFC0001234 — confirm with Operations for latest).
+
+COMMON WRONG ANSWERS AGENTS ARE GIVING (PLEASE STOP)
+"You can use FinBank to send money to the US." — WRONG. We don't support this.
+"Just enable international transactions on your card." — Correct for card spends, WRONG if customer wants to remit.
+"Use UPI to send money abroad." — Only valid for UAE, Singapore, Bhutan. Not a blanket answer.
+
+WHAT TO TELL CUSTOMERS WHO WANT TO REMIT ABROAD
+Acknowledge the request, explain FinBank's current limitation, and suggest they use an authorised remittance provider (Wise, Western Union, or their bank's remittance service). Log the request as a feature feedback ticket.

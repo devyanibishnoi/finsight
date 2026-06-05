@@ -1,0 +1,52 @@
+FinBank — INTERNAL POLICY
+Dispute Resolution SLAs
+Version: 4.1 | Last Updated: January 28, 2025 | Owner: Customer Experience & Compliance Team
+
+1. OVERVIEW
+This document defines the Service Level Agreements (SLAs) for resolving customer disputes across all transaction types. All timelines are in calendar days unless stated otherwise. These SLAs meet or exceed the minimum timelines mandated by RBI guidelines for digital payments and lending.
+
+2. UPI DISPUTE SLAs
+
+2.1 Transaction Not Delivered (money debited, beneficiary not credited)
+- Auto-reversal check: System checks NPCI within 1 hour of the failed transaction.
+- If NPCI confirms failure: Auto-reversal within T+1 (next business day).
+- If NPCI status is pending: System polls every 4 hours for up to 5 days.
+- If unresolved after 5 days: Manual investigation initiated. Resolution within 15 calendar days from dispute date.
+
+2.2 Wrong Beneficiary Credited (customer error)
+- FinBank cannot reverse transactions sent to wrong UPI IDs if the beneficiary bank confirms credit.
+- Customer advised to contact beneficiary directly.
+- FinBank will send a formal recall request to the beneficiary bank on customer request. Response time from beneficiary bank: 7–30 days.
+- This is not a guaranteed refund. FinBank's liability is limited to sending the recall request.
+
+2.3 Unauthorized Transaction (fraud)
+- Customer must report within 3 days of transaction for zero-liability protection.
+- Between 3–7 days: Limited liability applies (customer bears ₹10,000 or transaction amount, whichever is lower).
+- After 7 days: Full liability with customer. FinBank will still investigate but cannot guarantee recovery.
+- Investigation SLA: 10 business days. Provisional credit may be issued at agent discretion for amounts above ₹5,000.
+
+3. CARD DISPUTE SLAs
+
+3.1 Unauthorized Card Transaction
+- Report within 7 days for zero-liability protection (per RBI circular on limiting liability).
+- Chargeback raised with Visa/Mastercard within 2 business days of customer complaint.
+- Network investigation: 30–45 calendar days.
+- Provisional credit issued within 10 business days if investigation is pending beyond that point.
+
+3.2 Merchant Dispute (goods/services not received or not as described)
+- Customer must first attempt resolution with merchant for 7 days.
+- If unresolved, FinBank raises a chargeback on customer's behalf.
+- Resolution timeline: 30–60 calendar days depending on merchant bank response.
+
+4. WALLET DISPUTE SLAs
+Failed wallet load (money debited from bank, wallet not credited):
+- Auto-reversal within T+1.
+- If not reversed by T+2: Customer raises ticket. Investigation and resolution within 7 calendar days.
+
+5. NEFT/IMPS DISPUTE SLAs
+Transaction pending beyond 30 minutes (IMPS) or next business day (NEFT):
+- Agent raises trace request with partner bank. SLA: 5 business days.
+- If unresolved: Escalated to RBI Banking Ombudsman and customer is informed.
+
+6. ESCALATION
+If any SLA is breached, the ticket is auto-escalated to L3. Customer must be proactively informed of the breach with an updated resolution date. Compensation of ₹100 per day of SLA breach (beyond initial SLA) may be offered at L3 discretion, capped at ₹1,000.

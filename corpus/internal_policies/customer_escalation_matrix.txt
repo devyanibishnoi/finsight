@@ -1,0 +1,60 @@
+FinBank — INTERNAL POLICY
+Customer Support Escalation Matrix
+Version: 5.0 | Last Updated: March 15, 2025 | Owner: Customer Experience Team
+
+1. OVERVIEW
+This document defines the three-tier support structure, the scope of each tier, escalation criteria, and response SLAs. All support interactions must be logged in the CRM with complete notes. Escalation without a CRM log is not permitted.
+
+2. TIER DEFINITIONS
+
+L1 — Frontline Support
+Staffing: Customer-facing agents, first point of contact.
+Channels handled: In-app chat, email, social media DMs, helpline calls.
+Scope: Account information queries, KYC status, transaction status, basic troubleshooting, guided flows for PIN reset, card block, UPI issues.
+Authority:
+- Process refunds up to ₹5,000.
+- Initiate card blocks on customer request.
+- Initiate debit freeze on verified customer request.
+- Resend OTPs and account activation emails.
+Cannot do: Override account blocks, waive charges, access backend risk data, initiate investigation tickets, modify loan terms.
+
+L2 — Senior Support / Technical Resolution
+Staffing: Senior agents with backend CRM access.
+Escalation trigger: L1 unable to resolve within 24 hours, or issue falls outside L1 authority.
+Scope: Dispute investigation, chargeback initiation, manual KYC review coordination, fraud case handling, account freeze/unfreeze (within policy), refunds up to ₹50,000.
+Authority:
+- Approve refunds ₹5,001 to ₹50,000.
+- Waive bounce charges (once per loan lifetime).
+- Initiate chargeback with payment networks.
+- Schedule manual re-KYC for customers who failed automated verification twice.
+- Coordinate with partner banks on stuck NEFT/IMPS transactions.
+Response SLA from escalation: 4 business hours.
+
+L3 — Specialist Teams
+Sub-teams: Compliance, Fraud, Lending, Legal, Finance.
+Escalation trigger: L2 unable to resolve within 48 hours, regulatory breach suspected, fraud confirmed, SLA breach, court orders, loan restructuring, unclaimed balance handling.
+Scope: Regulatory reporting, law enforcement coordination, loan restructuring, nominee claim processing, account closure with balance disputes, fraud investigation.
+Authority: Full system access and cross-team sign-off power.
+Response SLA from escalation: 24 hours (initial response), resolution per case type.
+
+3. ESCALATION PROCESS
+L1 to L2: In CRM, select Escalate → L2 → Fill escalation reason (mandatory field). Customer notified automatically via SMS that their ticket has been escalated.
+L2 to L3: Same process. L2 must add a case summary of all steps already taken. L3 will not accept a blind escalation.
+Reverse escalation (L3 back to L2): L3 may return a case to L2 with specific instructions if it does not meet L3 criteria. L2 must action within 4 hours.
+
+4. SLA SUMMARY
+Issue Type | L1 SLA | L2 SLA | L3 SLA
+Account query | 1 hour | N/A | N/A
+Transaction status | 2 hours | 4 hours | N/A
+Failed transaction refund | 4 hours | 24 hours | 5 business days
+Fraud dispute | 4 hours (triage) | 48 hours | 10 business days
+KYC failure | 2 hours | 24 hours | 3–5 business days
+Loan issue | 2 hours | 24 hours | 5 business days
+SLA breach compensation review | N/A | 4 hours | 24 hours
+
+5. CUSTOMER COMMUNICATION STANDARDS
+Every escalation must be followed by a proactive SMS to the customer with: ticket number, escalated team name, and updated expected resolution date.
+If a resolution date is missed, L2 or L3 must communicate a new date within 2 hours of the breach. No customer should go more than 24 hours without an update on an open ticket.
+
+6. COMPLAINTS TO RBI OMBUDSMAN
+If a customer complaint is unresolved within 30 days, the customer has the right to escalate to the RBI Integrated Ombudsman. Agents must proactively inform customers of this right at the 25-day mark. FinBank's Nodal Officer details are available in-app and on the website.

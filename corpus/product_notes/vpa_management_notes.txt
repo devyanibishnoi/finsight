@@ -1,0 +1,45 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: VPA (UPI ID) Management — Rules and Edge Cases
+Author: Aditya Sharma, Product Lead (Payments)
+Date: February 20, 2025
+Audience: Support team
+
+---
+
+VPA stands for Virtual Payment Address — this is the UPI ID. It looks like: yourname@finbank or 9876543210@finbank. This note covers how VPAs work on FinBank and common issues we see.
+
+HOW VPAs ARE CREATED
+Every FinBank customer gets a default VPA automatically when they activate UPI: their registered mobile number followed by @finbank (e.g., 9876543210@finbank). Customers can also create a custom VPA (e.g., rahulkumar@finbank) from the UPI settings in-app.
+
+Multiple VPAs: Customers can have up to 3 active VPAs linked to their FinBank account. All 3 point to the same underlying savings account. Money received on any of the 3 VPAs lands in the same account.
+
+VPA NAMING RULES
+Custom VPAs must be:
+- 3–50 characters.
+- Alphanumeric only (letters and numbers). No spaces, no special characters except dot and underscore.
+- Not already taken by another FinBank customer.
+- Not a reserved word (FinBank, support, admin, help, etc.).
+VPAs are case-insensitive: rahulkumar@finbank and RahulKumar@finbank are the same.
+
+VPA DEACTIVATION
+A VPA is deactivated if:
+- Customer explicitly deletes it in-app (cannot delete the primary mobile-number based VPA).
+- Customer closes their FinBank account.
+- Account is dormant for more than 24 months.
+- Customer requests deactivation via support (L2 action required).
+Once a VPA is deactivated, it goes into a 6-month hold before it can be claimed by another customer. This prevents VPA squatting and confusion.
+
+EDGE CASE 1: Customer wants to transfer their VPA to a new phone number
+VPAs are tied to the account, not to the phone number. If a customer changes their registered mobile number, their existing VPAs (including the default @finbank VPA with the old number) continue to work. However, the default VPA will still show the old mobile number format. Customer can create a new custom VPA with their new number if they want.
+
+EDGE CASE 2: Customer sent money to their own old VPA (which has been deactivated)
+If a customer sends money to a deactivated VPA (theirs or someone else's), NPCI will reject the transaction. The transaction will fail, not succeed silently. Money returns to sender within T+1. Agents do not need to do anything, but should set expectations with the customer.
+
+EDGE CASE 3: VPA linked to wrong bank account (after switching primary account)
+If a customer has both a FinBank account and an external bank linked in the UPI app, they must manually set their default account in the UPI settings. Agents frequently get complaints where the customer intended to receive money in FinBank but it went to their HDFC account because HDFC was set as default. This is user configuration, not a bug. Walk the customer through changing the default account.
+
+EDGE CASE 4: Customer forgot their VPA
+Every VPA a customer has created is visible in-app under UPI → My UPI IDs. There is no way to recover a VPA if the account is inaccessible. Agents can look up a customer's VPAs in CRM → Account → UPI IDs.
+
+COLLECTING PAYMENTS: COLLECT REQUEST
+Merchants and customers can send a collect (pull payment) request to a VPA. The customer must approve the request by entering their UPI PIN. Collect requests expire after 30 minutes if not approved. Unapproved requests are automatically cancelled. FinBank does not auto-approve collect requests — always requires the customer's MPIN (except for pre-approved mandates below ₹2,000).

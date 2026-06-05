@@ -1,0 +1,49 @@
+FinBank — INTERNAL POLICY
+Account Dormancy Policy
+Version: 2.1 | Last Updated: November 5, 2024 | Owner: Operations & Compliance Team
+
+1. OVERVIEW
+This document defines when a FinBank account is classified as dormant, the restrictions applied to dormant accounts, the reactivation process, and the handling of unclaimed balances. This policy complies with RBI guidelines on inoperative accounts and unclaimed deposits.
+
+2. DORMANCY CLASSIFICATION
+An account is classified as inoperative (dormant) if there are no customer-initiated transactions for a continuous period of 12 months. System-generated credits (interest, refunds, reversals) do not count as customer-initiated transactions for dormancy purposes.
+
+Stages:
+- Inactive: No customer-initiated transaction for 9–12 months. No restrictions applied. Customer receives reminder at 9-month and 11-month marks via SMS and email.
+- Inoperative (Dormant): No customer-initiated transaction for 12 months or more. Restrictions apply (see Section 4).
+- Unclaimed: No customer contact or activity for 10 years. Balance transferred to RBI's Depositor Education and Awareness (DEA) Fund.
+
+3. TRANSACTIONS THAT RESET THE DORMANCY CLOCK
+The following reset the 12-month timer:
+- Any debit or credit transaction initiated by the customer (UPI, NEFT, IMPS, card swipe).
+- In-app login followed by a transaction (login alone does not reset the clock).
+- KYC update or re-KYC completion.
+- Customer-initiated profile update (address, nominee change).
+
+4. RESTRICTIONS ON DORMANT ACCOUNTS
+Outgoing (debit) transactions: Blocked completely.
+Incoming (credit) transactions: Allowed (salary credits, refunds, reversals continue to flow in).
+UPI: Incoming payments accepted, but customer cannot initiate outgoing UPI payments.
+Debit card: Blocked for POS and ATM usage.
+Online banking: Read-only access to view statements and balance.
+
+5. REACTIVATION PROCESS
+Customer submits a reactivation request via in-app or by visiting a partner banking point.
+Required steps:
+1. Identity re-verification via Aadhaar OTP on registered mobile or Video KYC.
+2. Self-declaration that the account is theirs (auto-generated in-app form).
+3. For accounts dormant more than 24 months, a fresh re-KYC is mandatory.
+Reactivation SLA: Immediate for automated re-verification. Up to 48 hours for cases requiring manual review.
+
+6. FEES AND CHARGES ON DORMANT ACCOUNTS
+Dormancy maintenance fee: ₹100 per quarter after the 12-month dormancy threshold is crossed.
+Maximum dormancy fee: Capped at 25% of account balance to avoid negative balance.
+Fee waiver: First quarter fee waived if customer reactivates within 15 months of dormancy start date.
+
+7. DORMANT ACCOUNT BALANCE HANDLING
+Interest continues to accrue on savings account balances even during dormancy.
+Balance remains accessible to the customer throughout the dormancy period (subject to reactivation).
+After 10 years of inoperative status with no customer response despite 3 written notices, the balance is transferred to the RBI DEA Fund. Customer can claim the amount from RBI directly even after this transfer.
+
+8. JOINT ACCOUNTS
+A joint account is classified as dormant only if both account holders have had no transactions for 12 months. Either account holder can reactivate the account independently.

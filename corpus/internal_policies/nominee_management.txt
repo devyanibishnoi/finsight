@@ -1,0 +1,53 @@
+FinBank — INTERNAL POLICY
+Nominee Management Policy
+Version: 1.5 | Last Updated: October 22, 2024 | Owner: Operations Team
+
+1. OVERVIEW
+This policy defines the rules for adding, modifying, and removing nominees on FinBank savings and wallet accounts. Nomination is a facility under the Banking Regulation Act and is not mandatory but strongly recommended.
+
+2. NOMINATION BASICS
+A nominee is the person designated to receive the account balance in the event of the account holder's death. Nomination does not confer ownership; the nominee receives funds as a trustee for the legal heirs.
+Maximum nominees per account: 1 (single nominee only per RBI guidelines for savings accounts).
+Nomination is available for: Savings accounts, Fixed Deposits (if offered), and Full KYC wallets.
+Nomination is not available for: Tier 0 or Tier 1 minimum KYC wallet accounts.
+
+3. ADDING A NOMINEE
+Customer must be Tier 2 (Full KYC) to add a nominee.
+Process:
+1. In-app: Profile → Nominee → Add Nominee.
+2. Enter nominee's full name, relationship to account holder, date of birth, and address.
+3. For minor nominees (below 18 years): A guardian's name and relationship must also be provided.
+4. Customer signs the nomination form digitally using Aadhaar OTP.
+Nominee does not need to verify or consent. They are not notified of the nomination.
+
+4. CHANGING A NOMINEE
+A nominee can be changed at any time by the account holder.
+Process: Same as adding a nominee. The new nomination automatically supersedes the old one.
+There is no limit on the number of times a nominee can be changed.
+Nominee change takes effect immediately upon digital signing.
+
+5. CANCELLING A NOMINEE
+Process: In-app → Profile → Nominee → Cancel Nomination → Confirm with Aadhaar OTP.
+Nomination cancellation takes effect immediately. Account remains without a nominee until a new one is added.
+
+6. MINOR NOMINEES
+If the nominee is below 18 years of age at the time of the account holder's death, the funds are paid to the guardian named at the time of nomination, on behalf of the minor.
+If the named guardian is also deceased, the funds are held in escrow until the minor turns 18 or a legal guardian is appointed by a court.
+
+7. NOMINEE CLAIM PROCESS (AFTER ACCOUNT HOLDER'S DEATH)
+The nominee must submit:
+- Death certificate of the account holder (original or certified copy).
+- Nominee's government-issued photo ID.
+- Signed claim form (downloadable from FinBank's website).
+- If minor: Guardian's ID and proof of guardianship.
+Claim is processed within 15 business days of receiving all required documents.
+Amount is transferred to the nominee's bank account (nominee must provide bank details). FinBank does not issue cheques for nominee claims.
+
+8. JOINT ACCOUNTS AND NOMINEES
+For joint accounts: Nomination is with respect to the balance that falls to the surviving account holder after the first account holder's death (survivorship applies first, then nomination).
+Both joint account holders must consent to adding or changing a nominee.
+
+9. AGENT GUIDANCE
+L1 agents can guide customers through the in-app nomination flow and answer questions about the process.
+L1 agents cannot update nominee details on behalf of a customer via CRM. Customers must complete the in-app process themselves using Aadhaar OTP.
+Nominee claim processing requires escalation to L3 (Operations team). L1 and L2 agents should collect all documents and pass to L3 within 1 business day of receiving them.

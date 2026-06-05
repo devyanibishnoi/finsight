@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinSight</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080810;
+      color: #c8d0e0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .logo {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+    }
+
+    .logo span { color: #fff; }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #2a3a4a;
+    }
+
+    /* Input area */
+    textarea {
+      width: 100%;
+      background: #0d0d1a;
+      border: 1px solid #1a1a30;
+      border-radius: 14px;
+      color: #c8d0e0;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 18px 20px;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 14px;
+    }
+
+    textarea::placeholder { color: #2a3a4a; }
+
+    textarea:focus {
+      border-color: #ffffff30;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .model-toggle {
+      display: flex;
+      background: #0d0d1a;
+      border: 1px solid #1a1a30;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .model-toggle button {
+      background: transparent;
+      border: none;
+      color: #3a4a5a;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: inherit;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .model-toggle button.active {
+      background: #ffffff10;
+      color: #fff;
+    }
+
+    .ask-btn {
+      background: #fff;
+      color: #080810;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-family: inherit;
+      letter-spacing: 0.02em;
+      transition: opacity 0.15s;
+    }
+
+    .ask-btn:hover:not(:disabled) {
+      opacity: 0.88;
+    }
+
+    .ask-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* Icon buttons (mic + call) */
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      border: 1px solid #1a1a30;
+      background: #0d0d1a;
+      color: #3a4a5a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .icon-btn:hover { border-color: #2a2a48; color: #5a6a7a; }
+
+    .icon-btn.listening {
+      border-color: #aa3333;
+      color: #ff5555;
+      background: #1a0505;
+      animation: btn-pulse 1s ease-in-out infinite;
+    }
+
+    .icon-btn.in-call {
+      border-color: #3a9a60;
+      color: #3a9a60;
+      background: #001508;
+      animation: btn-pulse 2s ease-in-out infinite;
+    }
+
+    .icon-btn.call-speaking {
+      border-color: #5566cc;
+      color: #7788ee;
+      background: #00020f;
+    }
+
+    .icon-btn.call-thinking {
+      border-color: #aa8800;
+      color: #ddaa00;
+      background: #0a0800;
+    }
+
+    @keyframes btn-pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+
+    .call-status-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .call-status-text.listening { color: #994444; }
+    .call-status-text.speaking  { color: #5566cc; }
+    .call-status-text.thinking  { color: #997700; }
+
+    /* Loading dots */
+    .loading {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .loading span {
+      width: 7px;
+      height: 7px;
+      background: #888;
+      border-radius: 50%;
+      animation: pulse 1.3s ease-in-out infinite;
+    }
+
+    .loading span:nth-child(2) { animation-delay: 0.18s; }
+    .loading span:nth-child(3) { animation-delay: 0.36s; }
+
+    @keyframes pulse {
+      0%, 80%, 100% { opacity: 0.15; transform: scale(0.75); }
+      40%            { opacity: 1;    transform: scale(1);    }
+    }
+
+    /* Answer card */
+    .answer-card {
+      background: #0d0d1a;
+      border: 1px solid #1a1a30;
+      border-radius: 14px;
+      padding: 26px;
+      margin-top: 24px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+
+    .answer-text {
+      line-height: 1.75;
+      color: #c8d0e0;
+      white-space: pre-wrap;
+      font-size: 0.97rem;
+    }
+
+    .citation {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.75em;
+      color: #b0b8c8;
+      background: #b0b8c810;
+      border: 1px solid #b0b8c820;
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin: 0 1px;
+      white-space: nowrap;
+    }
+
+    /* Answer footer */
+    .answer-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #141428;
+    }
+
+    .sources-btn {
+      background: transparent;
+      border: 1px solid #1a1a30;
+      color: #3a4a5a;
+      padding: 5px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+
+    .sources-btn:hover { border-color: #2a2a48; color: #5a6a7a; }
+
+    .latency {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: #1e2a38;
+    }
+
+    .cached-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #001a0d;
+      color: #3a9a60;
+      border: 1px solid #002a14;
+    }
+
+    /* Recent questions */
+    .history {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .history-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1e2a38;
+      margin-bottom: 2px;
+    }
+
+    .history-item {
+      background: transparent;
+      border: 1px solid #0d0d1a;
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: #2a3a4a;
+      font-size: 0.8rem;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    .history-item:hover {
+      border-color: #1a1a30;
+      color: #4a5a6a;
+    }
+
+    /* Sources panel */
+    .sources-panel {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .source-row {
+      background: #080810;
+      border: 1px solid #121224;
+      border-radius: 9px;
+      padding: 12px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .source-row-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .source-id {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: #7a8898;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .source-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .tag-rbi               { background: #1a1a00; color: #a89a40; border: 1px solid #2a2a00; }
+    .tag-internal_policies { background: #001a0d; color: #3a9a60; border: 1px solid #002a14; }
+    .tag-faqs              { background: #00101a; color: #3a7a9a; border: 1px solid #00182a; }
+    .tag-product_notes     { background: #0d0019; color: #7a4a9a; border: 1px solid #160028; }
+
+    .source-section {
+      font-size: 0.76rem;
+      color: #3a4a5a;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .source-row-bottom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-bar-track {
+      flex: 1;
+      height: 3px;
+      background: #121224;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: #2a3a5a;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .score-label {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: #3a4a5a;
+      flex-shrink: 0;
+      width: 38px;
+      text-align: right;
+    }
+
+    /* Conversation thread */
+    .thread {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .turn-question {
+      font-size: 0.88rem;
+      color: #5a6a7a;
+      margin-bottom: 10px;
+      padding-left: 2px;
+    }
+
+    .rewritten-hint {
+      font-size: 0.72rem;
+      color: #2a3a4a;
+      margin-bottom: 8px;
+      padding-left: 2px;
+      font-style: italic;
+    }
+
+    /* Error */
+    .error-card {
+      background: #120a0a;
+      border: 1px solid #2a1212;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      color: #ff6b6b;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    {% raw %}
+    const { useState, useRef, useEffect } = React;
+
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    function renderAnswer(text) {
+      const parts = text.split(/(\[[a-z0-9_]+\])/g);
+      return parts.map((part, i) =>
+        /^\[[a-z0-9_]+\]$/.test(part)
+          ? <span key={i} className="citation">{part}</span>
+          : <span key={i}>{part}</span>
+      );
+    }
+
+    // Strip [citations] for TTS
+    function stripCitations(text) {
+      return text.replace(/\[[^\]]+\]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function App() {
+      const [sessionId] = useState(() => {
+        let id = localStorage.getItem("finsight_session");
+        if (!id) { id = Math.random().toString(36).slice(2); localStorage.setItem("finsight_session", id); }
+        return id;
+      });
+
+      const [question, setQuestion]               = useState("");
+      const [model, setModel]                     = useState("ollama");
+      const [complianceMode, setComplianceMode]   = useState(false);
+      const [loading, setLoading]                 = useState(false);
+      const [error, setError]                     = useState(null);
+      const [recentQuestions, setRecentQuestions] = useState([]);
+      const [thread, setThread]                   = useState([]);
+      const [openSources, setOpenSources]         = useState(null);
+
+      // Speech state
+      const [micListening, setMicListening] = useState(false);
+      const [callMode, setCallMode]         = useState(false);
+      // 'idle' | 'listening' | 'thinking' | 'speaking'
+      const [callPhase, setCallPhase]       = useState('idle');
+
+      // Refs so async loops always see current values
+      const callModeRef   = useRef(false);
+      const threadRef     = useRef([]);
+      const recognitionRef = useRef(null);
+
+      useEffect(() => { threadRef.current = thread; }, [thread]);
+
+      // Core fetch — separated so call loop can get the answer back
+      const fetchAnswer = async (q, historyPayload) => {
+        const res = await fetch("/ask", {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({
+            question:        q,
+            model,
+            compliance_mode: complianceMode,
+            session_id:      sessionId,
+            history:         historyPayload,
+          }),
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        return data;
+      };
+
+      // ask() — handles a single question. If q is provided, use it; otherwise use textarea.
+      const ask = async (q) => {
+        const text = (q !== undefined ? q : question).trim();
+        if (!text || loading) return null;
+        setLoading(true);
+        setError(null);
+        setOpenSources(null);
+        const historyPayload = threadRef.current.map(t => ({ question: t.question, answer: t.answer }));
+        try {
+          const data = await fetchAnswer(text, historyPayload);
+          setThread(prev => [...prev, {
+            question:   text,
+            answer:     data.answer,
+            rewritten:  data.rewritten,
+            cached:     data.cached,
+            latency_ms: data.latency_ms,
+            chunks:     data.chunks,
+          }]);
+          setQuestion("");
+          fetch(`/history?session_id=${sessionId}`).then(r => r.json()).then(setRecentQuestions);
+          return data;
+        } catch (e) {
+          setError(e.message);
+          return null;
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const handleKeyDown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(); }
+      };
+
+      // --- STT helpers ---
+
+      const listenOnce = () => new Promise((resolve) => {
+        if (!SR) return resolve(null);
+        const rec = new SR();
+        recognitionRef.current = rec;
+        rec.lang = 'en-IN';
+        rec.interimResults = false;
+        rec.continuous = false;
+        let got = false;
+        rec.onresult = (e) => { got = true; resolve(e.results[0][0].transcript); };
+        rec.onerror  = (e) => resolve(e.error === 'not-allowed' ? '__denied__' : null);
+        rec.onend    = () => { if (!got) resolve(null); };
+        rec.start();
+      });
+
+      const speak = (text) => new Promise((resolve) => {
+        const utt = new SpeechSynthesisUtterance(stripCitations(text));
+        utt.onend   = resolve;
+        utt.onerror = resolve;
+        speechSynthesis.speak(utt);
+      });
+
+      // --- Mic button: STT → fills textarea ---
+
+      const toggleMic = async () => {
+        if (!SR) return;
+        if (micListening) {
+          recognitionRef.current?.stop();
+          setMicListening(false);
+          return;
+        }
+        setMicListening(true);
+        const result = await listenOnce();
+        setMicListening(false);
+        if (result && result !== '__denied__') setQuestion(result);
+      };
+
+      // --- Call mode: STS loop ---
+
+      const runCallLoop = async () => {
+        while (callModeRef.current) {
+          setCallPhase('listening');
+          const speech = await listenOnce();
+
+          if (!callModeRef.current) break;
+          if (!speech || speech === '__denied__') {
+            if (speech === '__denied__') { callModeRef.current = false; setCallMode(false); break; }
+            continue; // no speech → keep listening
+          }
+
+          setCallPhase('thinking');
+          setQuestion(speech);
+          const data = await ask(speech);
+
+          if (!callModeRef.current || !data) break;
+
+          setCallPhase('speaking');
+          await speak(data.answer);
+        }
+
+        setCallPhase('idle');
+      };
+
+      const toggleCallMode = () => {
+        if (callMode) {
+          callModeRef.current = false;
+          setCallMode(false);
+          setCallPhase('idle');
+          recognitionRef.current?.stop();
+          speechSynthesis.cancel();
+        } else {
+          callModeRef.current = true;
+          setCallMode(true);
+          runCallLoop();
+        }
+      };
+
+      // --- Derived UI helpers ---
+
+      const formatLatency = (ms) =>
+        ms >= 1000 ? `${(ms / 1000).toFixed(1)}s` : `${ms}ms`;
+
+      const callBtnClass = () => {
+        if (!callMode) return 'icon-btn';
+        if (callPhase === 'speaking') return 'icon-btn call-speaking';
+        if (callPhase === 'thinking') return 'icon-btn call-thinking';
+        return 'icon-btn in-call';
+      };
+
+      return (
+        <div className="app">
+          <header>
+            <div className="logo">Fin<span>Sight</span></div>
+            <div className="tagline">Neobank Knowledge Assistant</div>
+          </header>
+
+          <textarea
+            rows={3}
+            placeholder="Ask a policy or compliance question... (Enter to submit)"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+
+          <div className="controls">
+            <div className="model-toggle">
+              <button className={model === "ollama" ? "active" : ""} onClick={() => setModel("ollama")}>
+                Llama 3.1
+              </button>
+              <button className={model === "claude" ? "active" : ""} onClick={() => setModel("claude")}>
+                Claude Haiku
+              </button>
+              <button
+                className={complianceMode ? "active" : ""}
+                onClick={() => setComplianceMode(c => !c)}
+                style={{borderLeft: "1px solid #1a1a30", marginLeft: "3px", paddingLeft: "14px"}}
+              >
+                {complianceMode ? "Compliance ON" : "Compliance"}
+              </button>
+            </div>
+
+            <div style={{display: "flex", alignItems: "center", gap: "8px"}}>
+              {SR && (
+                <>
+                  {/* Microphone — STT only, fills textarea */}
+                  <button
+                    className={`icon-btn${micListening ? ' listening' : ''}`}
+                    onClick={toggleMic}
+                    disabled={callMode || loading}
+                    title={micListening ? "Stop recording" : "Speak your question"}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                      <line x1="12" y1="19" x2="12" y2="23"/>
+                      <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                  </button>
+
+                  {/* Phone — full STS call loop */}
+                  <button
+                    className={callBtnClass()}
+                    onClick={toggleCallMode}
+                    disabled={micListening}
+                    title={callMode ? "End call" : "Start voice call (speak → answer → speak)"}
+                  >
+                    {callMode ? (
+                      /* End-call icon */
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45c.98.37 2.03.63 3.11.77a2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.42 19.42 0 0 1 4.99 12"/>
+                        <line x1="1" y1="1" x2="23" y2="23"/>
+                      </svg>
+                    ) : (
+                      /* Start-call icon */
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.4 2 2 0 0 1 3.9 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.26-1.17a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                    )}
+                  </button>
+
+                  {callMode && (
+                    <span className={`call-status-text ${callPhase}`}>
+                      {callPhase === 'listening' ? 'listening...' : callPhase === 'thinking' ? 'thinking...' : 'speaking...'}
+                    </span>
+                  )}
+                </>
+              )}
+
+              <button className="ask-btn" onClick={() => ask()} disabled={loading}>
+                {loading ? "Thinking..." : "Ask"}
+              </button>
+            </div>
+          </div>
+
+          {recentQuestions.length > 0 && (
+            <div className="history">
+              <div className="history-label">Recent</div>
+              {recentQuestions.map((h, i) => (
+                <button key={i} className="history-item" onClick={() => setQuestion(h.question)}>
+                  {h.question}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {loading && (
+            <div className="loading"><span /><span /><span /></div>
+          )}
+
+          {thread.length > 0 && (
+            <div className="thread">
+              {[...thread].reverse().map((turn, displayIdx) => {
+                const originalIdx = thread.length - 1 - displayIdx;
+                return (
+                <div key={originalIdx} className="answer-card">
+                  <div className="turn-question">{turn.question}</div>
+                  {turn.rewritten && (
+                    <div className="rewritten-hint">↳ searched as: "{turn.rewritten}"</div>
+                  )}
+                  <div className="answer-text">{renderAnswer(turn.answer)}</div>
+                  <div className="answer-footer">
+                    <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                      {turn.chunks.length > 0 && (
+                        <button className="sources-btn" onClick={() => setOpenSources(openSources === originalIdx ? null : originalIdx)}>
+                          {openSources === originalIdx ? "Hide" : "Show"} sources ({turn.chunks.length})
+                        </button>
+                      )}
+                      {turn.cached && <span className="cached-badge">cached</span>}
+                    </div>
+                    <span className="latency">{turn.cached ? "instant" : formatLatency(turn.latency_ms)}</span>
+                  </div>
+                  {openSources === originalIdx && (
+                    <div className="sources-panel">
+                      {turn.chunks.map((c, i) => (
+                        <div key={c.chunk_id} className="source-row">
+                          <div className="source-row-top">
+                            <span className="source-id">#{i + 1}</span>
+                            <span className={`source-tag tag-${c.source}`}>{c.source.replace('_', ' ')}</span>
+                            <span className="source-section">{c.section || c.chunk_id}</span>
+                          </div>
+                          <div className="source-row-bottom">
+                            <div className="score-bar-track">
+                              <div className="score-bar-fill" style={{width: `${Math.min(c.score * 100, 100)}%`}} />
+                            </div>
+                            <span className="score-label">score {c.score.toFixed(3)}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                );
+              })}
+            </div>
+          )}
+
+          {error && <div className="error-card">{error}</div>}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    {% endraw %}
+  </script>
+</body>
+</html>

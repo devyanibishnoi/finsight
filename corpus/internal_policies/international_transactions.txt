@@ -1,0 +1,50 @@
+FinBank — INTERNAL POLICY
+International Transaction Policy
+Version: 2.3 | Last Updated: February 28, 2025 | Owner: Cards & Compliance Team
+
+1. OVERVIEW
+This policy governs the use of FinBank debit cards and UPI for international transactions, including enabling/disabling international usage, transaction limits, forex charges, and restrictions under FEMA.
+
+2. DEFAULT SETTINGS
+International usage on FinBank debit cards is disabled by default for all accounts.
+This applies to: online purchases on foreign websites, POS transactions outside India, and ATM withdrawals abroad.
+International UPI usage is not supported (UPI is currently India-domestic only per NPCI guidelines, except for select bilateral corridors with UAE, Singapore, and Bhutan as of 2024).
+
+3. ENABLING INTERNATIONAL TRANSACTIONS
+Eligibility: Tier 2 (Full KYC) accounts only. Tier 0 and Tier 1 accounts cannot enable international usage.
+Process: In-app → Cards → International Transactions → Enable → Select valid duration.
+Duration options: 7 days, 30 days, 90 days, or Always On.
+"Always On" requires a secondary verification step (Video KYC confirmation or Aadhaar OTP + Selfie).
+Customers can disable international transactions at any time instantly via in-app.
+
+4. INTERNATIONAL TRANSACTION LIMITS
+ATM withdrawals abroad: ₹25,000 equivalent per day (subject to local ATM limits).
+POS transactions abroad: ₹1,00,000 equivalent per day.
+Online transactions on foreign websites: ₹1,00,000 equivalent per day.
+Combined international limit: ₹1,00,000 per calendar day (all international channels combined).
+LRS (Liberalised Remittance Scheme) annual limit: USD 2,50,000 per financial year per individual, as mandated by RBI.
+
+5. FOREX CHARGES
+Forex markup fee: 2.5% on the transaction amount (applied on top of the network exchange rate).
+Cross-currency conversion is done at the Visa/Mastercard network rate at the time of settlement (typically T+2 from the transaction date). The rate at settlement may differ from the rate at the time of transaction.
+ATM withdrawal fee abroad: ₹500 per transaction (flat fee, in addition to forex markup).
+No fee for declining an international transaction.
+
+6. BLOCKED COUNTRIES
+Transactions to entities or individuals in FATF high-risk and non-cooperative jurisdictions are blocked. The current blocked list is maintained by the Compliance team and updated quarterly. Customers attempting transactions to blocked countries will see an error: "Transaction not permitted for this location."
+
+7. FEMA COMPLIANCE
+All international transactions are subject to the Foreign Exchange Management Act (FEMA).
+Prohibited uses under FEMA for Indian residents:
+- Purchase of lottery tickets, banned magazines, football pools.
+- Remittance for purchase of foreign securities not approved by SEBI.
+- Payments to entities in countries identified as non-cooperative by FATF.
+FinBank automatically blocks transactions falling into FEMA-prohibited categories at the merchant category code level.
+
+8. TAX COLLECTED AT SOURCE (TCS) ON INTERNATIONAL SPENDS
+As per Finance Act 2023, TCS of 20% is applicable on international card spends above ₹7,00,000 per financial year (including spending on international apps like Netflix, Amazon US).
+FinBank reports TCS to the Income Tax Department as required. TCS is credited to the customer's Form 26AS and can be claimed as credit while filing ITR.
+FinBank collects TCS at the time of the transaction on amounts exceeding the ₹7,00,000 annual threshold.
+
+9. AGENT GUIDANCE
+L1 agents can enable/disable international transactions on behalf of a customer (with identity verification) if the customer is unable to do so in-app. This is done via CRM → Cards → International Settings. L1 cannot override the Tier 2 eligibility requirement.

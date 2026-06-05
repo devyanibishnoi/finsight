@@ -1,0 +1,58 @@
+FinBank — INTERNAL POLICY
+UPI Transaction Limit Policy
+Version: 2.2 | Last Updated: March 1, 2025 | Owner: Payments Team
+
+1. OVERVIEW
+This document defines UPI transaction limits applicable to FinBank customers, including per-transaction caps, daily caps, cooling periods, and special category limits. All limits are governed by NPCI circulars and RBI guidelines. FinBank applies the more restrictive of NPCI-mandated limits and its own internal risk limits.
+
+2. STANDARD LIMITS BY KYC TIER
+
+Tier 0 (No KYC):
+- Per transaction: ₹500
+- Daily limit: ₹2,000
+- Monthly limit: ₹5,000
+
+Tier 1 (Minimum KYC):
+- Per transaction: ₹25,000
+- Daily limit: ₹50,000
+- Monthly limit: ₹2,00,000
+
+Tier 2 (Full KYC):
+- Per transaction: ₹1,00,000 (standard)
+- Daily limit: ₹1,00,000
+- Monthly limit: No cap (subject to account balance)
+
+3. ENHANCED LIMITS FOR SPECIFIC CATEGORIES (TIER 2 ONLY)
+Per NPCI circular dated November 2023, UPI transaction limit is enhanced to ₹2,00,000 per transaction for:
+- Healthcare payments (hospitals, clinics, diagnostic labs registered under specific merchant category codes)
+- Educational institutions (schools, colleges, universities)
+- IPO applications via UPI
+- Insurance premium payments to IRDAI-regulated entities
+
+These enhanced limits apply only when the merchant is correctly registered with the appropriate merchant category code. FinBank cannot override this for uncategorized merchants.
+
+4. NEW ACCOUNT AND NEW UPI ID COOLING PERIOD
+For accounts registered on FinBank in the last 24 hours:
+- UPI transactions capped at ₹5,000 per transaction.
+- Daily cap: ₹10,000.
+- This applies regardless of KYC tier.
+- Cooling period is mandatory per NPCI's fraud prevention guidelines effective March 2024.
+
+For a new UPI ID added to an existing account (e.g., new VPA linked):
+- New VPA is subject to the same ₹5,000 / ₹10,000 cooling period for the first 24 hours.
+
+5. P2P vs P2M DISTINCTIONS
+Person-to-Person (P2P): Standard KYC-tier limits apply.
+Person-to-Merchant (P2M): Standard limits apply, with enhanced limits for approved merchant categories (see Section 3).
+
+6. COLLECT REQUEST LIMITS
+Customers may receive UPI collect requests (pull payments). FinBank allows auto-payment of collect requests up to ₹2,000 without additional authentication if the mandate was pre-approved by the customer. Amounts above ₹2,000 always require MPIN confirmation by the customer.
+
+7. UPI LITE (LOW-VALUE PAYMENTS)
+FinBank supports UPI Lite for offline/low-value payments up to ₹500 per transaction and a wallet balance cap of ₹2,000. UPI Lite balance does not count toward the daily UPI limit. UPI Lite is available only for Tier 1 and Tier 2 accounts.
+
+8. FAILED AND DECLINED TRANSACTIONS
+A declined UPI transaction due to limit breach does not count as a failed transaction. It does not attract any charge. The daily limit counter resets at midnight IST. Declined transactions are logged and available in customer transaction history with the reason code "LIMIT_EXCEEDED".
+
+9. LIMIT ENHANCEMENT REQUESTS
+Customers can request a temporary limit enhancement via in-app support. Requirements: Tier 2 KYC, account age above 3 months, no fraud flags in the last 6 months. Enhancement is up to 2x the standard Tier 2 limit, valid for 7 days, and can be requested a maximum of twice per year.

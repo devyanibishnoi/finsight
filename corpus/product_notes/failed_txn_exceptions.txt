@@ -1,0 +1,35 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: Failed Transaction Exception Handling — Edge Cases
+Author: Aditya Sharma, Product Lead (Payments)
+Date: January 25, 2025
+Audience: Support team, L2 agents
+
+---
+
+This note captures the most common edge cases in failed transaction handling that are causing unnecessary escalations. Please read carefully before raising an L3 ticket for payment issues.
+
+CASE 1: UPI transaction shows "pending" for more than 2 hours
+Standard auto-reversal window is T+1. But sometimes NPCI marks a transaction as "pending" (not failed or success) for several hours, especially during high-traffic periods (festival sales, month-end salary days).
+What to tell the customer: "Your transaction is in a pending state with NPCI. If it doesn't resolve in 24 hours, you will receive an auto-reversal. You have not been double-charged."
+Do NOT raise an investigation ticket before 24 hours unless the customer has confirmed double debit. Premature investigation tickets clog the system.
+
+CASE 2: Money debited twice for one transaction (double debit)
+This happens occasionally due to network timeout issues where the customer's app retries the request.
+Identification: Check CRM transaction log. Two transactions with identical amount, same beneficiary, within 2 minutes of each other.
+Fix: One of the two transactions is almost always auto-reversed within T+1. If both are settled after T+2, L2 must raise a manual refund for the duplicate. Do not wait for the customer to ask twice.
+
+CASE 3: Refund credited to wrong account (old bank account)
+Happens when a customer changed their UPI-linked bank account but a refund was initiated by the merchant before the change was reflected.
+Fix: Refunds go to the account linked at the time the original payment was made, not the current linked account. This is expected behavior. Customer must contact the original bank for the refund. FinBank cannot redirect a refund that has already been sent to another bank.
+
+CASE 4: IMPS transaction shows successful in FinBank but beneficiary says money not received
+This is a T+0 vs T+1 confusion issue. IMPS is near-instant but beneficiary banks sometimes show a delay in crediting customer accounts even after receiving funds.
+Fix: Advise customer to ask the beneficiary to check with their bank. Provide the RRN (Reference Number) from the FinBank transaction details. The RRN is the trace ID to use with the beneficiary bank.
+
+CASE 5: Transaction declined due to "risk block" but customer sees no notification
+Our risk engine sometimes silently declines transactions flagged as suspicious without sending a real-time alert (this is a known product gap, fix in progress for Q2 2025).
+Fix: L1 can check the transaction decline reason in CRM → Transaction → Decline Reason Code. If the reason is "RISK_ENGINE_HOLD", reassure the customer and advise they retry. If the transaction is declined more than twice for the same risk reason, escalate to L2 to review the risk flag.
+
+CASE 6: Refund received but not visible in transaction history
+Sometimes refunds process correctly but don't appear in the in-app transaction list for up to 4 hours due to a caching delay. The balance is updated correctly.
+Fix: Ask customer to check the account balance first. If balance is correct (includes refund), it's a display issue, not a missing refund. Hard refresh of app (close and reopen) resolves in most cases.

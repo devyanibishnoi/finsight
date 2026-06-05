@@ -1,0 +1,32 @@
+# Environment variables — never commit real keys
+.env
+
+# Real company data — excluded from public repo
+corpus/faqs/
+eval/
+week1.md
+results.csv
+
+# Claude settings
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+.venv/
+
+# Data — generated files, too large, or runtime logs
+data/chroma_db/
+data/chunks.jsonl
+data/queries.db
+data/traces.jsonl
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

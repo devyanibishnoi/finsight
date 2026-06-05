@@ -1,0 +1,37 @@
+FinBank PRODUCT TEAM — INTERNAL NOTE
+Subject: NPCI / Partner Bank Downtime — Handling Procedures
+Author: Dev Ops & Product Team
+Date: January 12, 2025
+Audience: All support staff
+
+---
+
+When NPCI or our partner bank systems go down, the support team gets flooded with tickets. This note tells you exactly what to say and do during different types of downtime. Bookmark this.
+
+TYPE 1: NPCI UPI SYSTEM DOWNTIME
+What happens: All UPI transactions fail with "Transaction Failed" or "Service Unavailable". This affects all UPI apps in India, not just FinBank.
+How to identify: Check the internal status dashboard (link in CRM homepage). If NPCI UPI shows "Degraded" or "Down", all UPI failures are NPCI's issue, not FinBank's.
+What to tell customers: "We are aware that UPI transactions are currently experiencing issues. This is an NPCI-level disruption affecting all payment apps in India. Our team is monitoring the situation. Please try again in 30–60 minutes. No money has been lost — any failed transaction will not be charged."
+What NOT to say: Do not say "we are working on it" — this implies FinBank can fix it. We can't. NPCI fixes it.
+Typical resolution time: UPI disruptions are usually resolved within 1–3 hours.
+
+TYPE 2: PARTNER BANK CORE BANKING DOWNTIME
+What happens: NEFT, IMPS, and account balance queries may fail. UPI sometimes works because it routes differently.
+Affects: Customers trying to do NEFT/IMPS or check balance, customers whose salary credits are delayed.
+How to identify: Partner bank status shows "Down" on the internal dashboard.
+What to tell customers about delayed salary/NEFT: "There is currently a disruption with our banking partner's systems. Incoming transfers may be delayed. If your salary or transfer was expected today, it will typically be credited within 4 hours of the systems being restored."
+What to tell customers about failed IMPS: "Your IMPS transaction could not be processed due to a banking system disruption. If money was debited, it will be auto-reversed within T+1. Please do not retry the same transaction until the system is restored."
+
+TYPE 3: FinBank APP / SERVER DOWNTIME
+What happens: Customers cannot log into the app or access any features.
+How to identify: Engineering team will post an incident in the #incidents Slack channel and on the internal status dashboard.
+What to tell customers: Use the standard downtime template in CRM → Templates → Downtime. Do not make up estimated restoration times unless Engineering has provided one.
+
+REFUND AND RETRY POLICY DURING DOWNTIME
+Do NOT manually initiate refunds for transactions that failed during NPCI downtime. These transactions will be auto-reversed by NPCI's settlement process once the system is restored. Raising manual refunds during downtime leads to double-refunds — this has happened before and is a compliance issue.
+Exception: If the transaction failed more than 48 hours ago (predates the current incident), it is not related to the current downtime and should be handled as a standard failed transaction.
+
+COMMUNICATION PROTOCOL DURING DOWNTIME
+L1 agents: Use approved templates. Do not speculate. Update ticket with "Linked to downtime incident [incident ID]".
+L2 agents: Coordinate with engineering for ETR (Estimated Time to Resolution). Approve bulk communication to affected customers if incident is more than 2 hours old.
+Social media: All public-facing downtime communication goes through the Marketing team. Do not post anything on social media yourself.

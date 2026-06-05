@@ -1,0 +1,59 @@
+FinBank — INTERNAL POLICY
+Card Blocking & Unblocking Policy
+Version: 3.0 | Last Updated: February 14, 2025 | Owner: Cards & Payments Team
+
+1. OVERVIEW
+This policy governs when a debit or prepaid card is automatically or manually blocked, the process to unblock a card, and the card replacement procedure. All FinBank physical and virtual cards are subject to this policy.
+
+2. AUTOMATIC CARD BLOCK TRIGGERS
+
+2.1 PIN Failures
+- 3 consecutive wrong PIN attempts at an ATM or POS terminal → Card blocked immediately.
+- Unblock method: Customer must reset PIN via in-app before the card can be used again. ATM PIN reset using Aadhaar-linked OTP is also available.
+
+2.2 Fraud Detection
+- Transaction flagged by FinBank's fraud detection model as high-risk (score above 90/100) → Card temporarily blocked for 2 hours.
+- If customer confirms the transaction in-app within the 2-hour window → Block lifted automatically.
+- If customer does not respond within 2 hours → Block extended to 24 hours, customer notified.
+- If customer marks the transaction as unauthorized → Card permanently blocked, replacement process initiated.
+
+2.3 CVV / Expiry Failures
+- 5 incorrect CVV entries on online transactions within 24 hours → Card blocked for online transactions for 24 hours.
+- Card usage attempted after expiry date → Card blocked. Physical card replacement required.
+
+2.4 Account Freeze
+If the underlying account is placed under full freeze, all associated cards are automatically blocked for the duration of the freeze.
+
+3. MANUAL CARD BLOCK (CUSTOMER-INITIATED)
+Customers can block their card instantly via:
+- In-app: Cards section → Block Card → Select Reason (Lost / Stolen / Suspicious Activity).
+- Support chat: L1 agent can initiate block on behalf of the customer after identity verification.
+- Helpline: After passing identity verification questions.
+Blocked cards cannot be unblocked. A manual block triggers the card replacement process automatically.
+
+4. TEMPORARY INTERNATIONAL BLOCK
+International transactions are disabled by default. Customers can toggle international usage on/off in-app. If a transaction is attempted in a new country and international toggle is off → Transaction declined (card not blocked). Customer is notified and can enable international transactions in-app.
+
+5. CARD UNBLOCKING PROCESS
+
+5.1 PIN Failure Block
+Customer resets PIN in-app using Aadhaar OTP or Video KYC confirmation. PIN reset takes effect immediately. Card usable within 10 minutes.
+
+5.2 Fraud Detection Block (Temporary, 2-hour)
+Customer confirms or denies the flagged transaction in-app. Confirmation lifts block immediately. Denial triggers permanent block + replacement.
+
+5.3 Online CVV Block (24-hour)
+Auto-releases after 24 hours. No action required by customer or agent.
+
+6. CARD REPLACEMENT
+Triggered by: Customer-initiated permanent block (lost/stolen), fraud-confirmed block, card damage, card expiry.
+Replacement card delivery:
+- Virtual card: Issued instantly via in-app. Usable immediately for online transactions.
+- Physical card: Dispatched within 2 business days. Delivery in 5–7 business days (metro cities), 7–10 business days (non-metro).
+- Physical card replacement fee: ₹200 (first replacement free per calendar year for Tier 2 accounts).
+- Emergency physical card: Available in select cities via courier. Fee: ₹500. Delivery: 24–48 hours.
+Old card is permanently deactivated at the moment replacement is initiated. All auto-pay mandates linked to the old card number must be updated manually by the customer.
+
+7. AGENT GUIDANCE
+L1 agents can: initiate manual card block, guide customers through PIN reset, check card status.
+L1 agents cannot: override a fraud-triggered block, expedite physical card delivery, waive replacement fees (L2 approval required for fee waiver).

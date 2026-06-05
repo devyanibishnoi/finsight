@@ -1,0 +1,57 @@
+FinBank — INTERNAL POLICY
+Prepaid Wallet Limits & Rules
+Version: 1.8 | Last Updated: January 10, 2025 | Owner: Payments & Compliance Team
+
+1. OVERVIEW
+FinBank offers a prepaid payment instrument (PPI) wallet governed by RBI Master Directions on Prepaid Payment Instruments. This document defines the balance limits, load limits, transfer rules, and expiry conditions for FinBank's wallet product.
+
+2. WALLET TYPES
+
+2.1 Minimum KYC Wallet
+Eligibility: Aadhaar OTP verification completed.
+Maximum balance at any point: ₹10,000
+Monthly load limit: ₹10,000 (cumulative across all load methods in a calendar month)
+Usage: Merchant payments only. Cannot be used for P2P transfers.
+Wallet-to-bank transfer: Not permitted.
+Validity: 12 months from last load or transaction, whichever is later.
+
+2.2 Full KYC Wallet
+Eligibility: Video KYC or in-person KYC with PAN + Aadhaar completed.
+Maximum balance at any point: ₹2,00,000
+Monthly load limit: ₹2,00,000
+Usage: Merchant payments, P2P transfers to other FinBank customers, and transfers to any bank account.
+Wallet-to-bank transfer: Permitted up to ₹10,000 per day and ₹50,000 per month.
+
+3. WALLET LOAD METHODS
+Debit card (any bank): Accepted.
+Net banking: Accepted.
+UPI: Accepted.
+Credit card: Not accepted for wallet load (per RBI PPI guidelines).
+Cash at physical locations: Not supported by FinBank.
+Maximum number of loads per day: 5.
+
+4. WALLET SPENDING LIMITS
+Per transaction: ₹10,000 (Min KYC) | ₹50,000 (Full KYC).
+Daily spending limit: ₹10,000 (Min KYC) | ₹1,00,000 (Full KYC).
+
+5. WALLET EXPIRY
+If a Full KYC wallet has no load or transaction for 12 consecutive months, it enters a dormant state. Dormant wallets cannot be used for transactions but the balance is preserved. Customer must complete a re-activation step (OTP verification on registered mobile) to reactivate. Dormant wallets older than 36 months with no activity: Balance is transferred to the customer's linked FinBank savings account (if exists) or held in escrow for 3 years, after which it is transferred to the Depositor Education and Awareness Fund per RBI guidelines.
+
+6. WALLET CLOSURE
+Customer-initiated closure: Wallet balance must be zero or transferred to linked bank account before closure. Transfer fee: Nil.
+Account closure: Wallet balance refunded to registered bank account within 7 business days.
+
+7. RESTRICTIONS
+Wallet cannot be used for the following:
+- Purchase of foreign currency or forex cards.
+- Mutual fund investments (direct).
+- Cross-border transactions.
+- Government tax payments (only bank accounts accepted for most government portals).
+- Betting, gaming, or lottery platforms (blocked at merchant category level).
+
+8. INTEROPERABILITY
+Per RBI PPI interoperability guidelines effective April 2023, FinBank's Full KYC wallet is interoperable with other UPI-enabled wallets and bank accounts. Customers can send money from FinBank wallet to any UPI handle or bank account. Incoming transfers from other wallets are also accepted for Full KYC wallet holders.
+
+9. WALLET TOP-UP FROM WALLET (INTER-WALLET TRANSFERS)
+Receiving into FinBank wallet from another PPI: Permitted for Full KYC wallets.
+Loading FinBank wallet from a credit card or another wallet: Not permitted per RBI guidelines.

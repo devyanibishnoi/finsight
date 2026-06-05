@@ -1,0 +1,45 @@
+FinBank — INTERNAL POLICY
+PAN-Aadhaar Linking Policy
+Version: 2.0 | Last Updated: January 5, 2025 | Owner: Compliance Team
+
+1. OVERVIEW
+The Government of India has made it mandatory for all individuals to link their Permanent Account Number (PAN) with Aadhaar. This document defines FinBank's obligations and the consequences for customers who have not completed this linking.
+
+2. REGULATORY REQUIREMENT
+As per Section 139AA of the Income Tax Act and the RBI KYC Master Directions, all Full KYC (Tier 2) accounts must have a PAN linked with Aadhaar. A PAN that is not linked with Aadhaar becomes inoperative under Income Tax rules. An inoperative PAN affects the customer's ability to maintain a Full KYC account.
+
+3. FinBank's OBLIGATIONS
+FinBank is required to:
+- Verify PAN-Aadhaar linking status for all Tier 2 customers during account opening.
+- Re-verify PAN-Aadhaar linking status during periodic re-KYC.
+- Restrict account functionality if PAN becomes inoperative.
+FinBank checks PAN-Aadhaar linking status via the Income Tax Department's API at account opening and quarterly thereafter for active Tier 2 accounts.
+
+4. CONSEQUENCES OF INOPERATIVE PAN FOR FinBank ACCOUNTS
+If FinBank detects that a Tier 2 customer's PAN is inoperative:
+Step 1: In-app notification sent immediately: "Your PAN is not linked to Aadhaar. Please complete linking to avoid account restrictions."
+Step 2: If not resolved within 30 days of notification: Debit freeze applied to account.
+Step 3: If not resolved within 60 days of notification: Account downgraded to Tier 1 status with Tier 1 limits and restrictions.
+Step 4: If not resolved within 90 days of notification: Account further restricted to read-only until PAN-Aadhaar linking is confirmed.
+
+5. HOW CUSTOMERS LINK PAN WITH AADHAAR
+This is done directly with the Income Tax Department, not via FinBank.
+Methods:
+- Online: IT Department portal (incometax.gov.in) → Link Aadhaar.
+- SMS: Send SMS to 567678 or 56161 in format: UIDPAN[space][12-digit Aadhaar][space][10-digit PAN]
+- Fee: A late fee of ₹1,000 is charged by the IT Department for linking (applicable since July 2023).
+FinBank cannot complete PAN-Aadhaar linking on behalf of the customer. Agents must direct customers to the IT Department portal.
+
+6. RESTORING ACCOUNT AFTER LINKING
+After linking PAN with Aadhaar, the IT Department's system typically updates within 4–7 working days.
+Customer must notify FinBank via in-app support or raise a ticket. FinBank re-verifies the linking status and lifts the restriction within 2 business days of confirmed linking.
+Tier 2 status is restored to full functionality automatically once linking is confirmed.
+
+7. CUSTOMERS WITH NO PAN
+Certain customers (e.g., minors, specific rural populations) may not have a PAN. For such accounts:
+- Account can only be maintained at Tier 1 level (maximum balance ₹50,000, restricted transactions).
+- Full KYC upgrade requires PAN as mandatory document. No alternative accepted.
+
+8. AGENT GUIDANCE
+L1 agents can: explain the linking requirement, share the IT Department portal link, check the account's current restriction status, and raise the re-verification ticket once customer confirms linking.
+L1 agents cannot: perform PAN-Aadhaar linking, access IT Department data, or override the restriction manually. These are system-enforced.
