@@ -130,7 +130,6 @@ finsight/
 │   ├── app.py               # Flask backend
 │   └── templates/
 │       └── index.html       # Frontend
-├── WRITEUP.md               # Design decisions, experiments, metrics
 ├── requirements.txt
 └── .env.example
 ```
@@ -153,5 +152,3 @@ Run against 50 questions (30 in-corpus, 10 OOC, 10 adversarial) with Llama 3.1 8
 | Cost per Query | Logged | $0.00 | $0.00 | $0.00305 | ~$0.00305 |
 
 Faithfulness is below target for all runs — both models add background context not directly in the retrieved chunks. The fix is a post-generation verification step. HyDE improves MRR marginally (+0.005) but roughly doubles latency — not worth it at this corpus size.
-
-See [WRITEUP.md](WRITEUP.md) for full design rationale and experiment analysis.
