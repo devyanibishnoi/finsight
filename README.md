@@ -1,6 +1,6 @@
 # FinSight
 
-A production-grade RAG system for neobanking customer support. Ask natural-language questions about policies, regulations, and procedures — FinSight retrieves the most relevant chunks from your corpus and generates grounded answers with inline citations.
+A production-grade RAG system for neobanking customer support. Ask natural-language questions about policies, regulations, and procedures, and FinSight retrieves the most relevant chunks from your corpus and generates grounded answers with inline citations.
 
 No LangChain. No LlamaIndex. Everything written from scratch.
 
@@ -16,7 +16,7 @@ The repo ships with a working example corpus:
 | Synthetic internal policy docs | TXT | 15 fictional neobank policy documents |
 | Synthetic product notes | TXT | 10 fictional product team edge-case notes |
 
-**You can swap in your own documents** — drop PDFs or TXTs into `corpus/` subdirectories and re-run the ingestion scripts.
+**You can swap in your own documents**: drop PDFs or TXTs into `corpus/` subdirectories and re-run the ingestion scripts.
 
 ---
 
@@ -24,8 +24,8 @@ The repo ships with a working example corpus:
 
 - Python 3.11
 - [Ollama](https://ollama.com) with `llama3.1:8b` pulled: `ollama pull llama3.1:8b`
-- Tesseract OCR (`brew install tesseract` on Mac) — only needed to re-run corpus ingestion on scanned PDFs
-- AWS Bedrock credentials if using Claude for generation — see `.env.example`
+- Tesseract OCR (`brew install tesseract` on Mac), only needed to re-run corpus ingestion on scanned PDFs
+- AWS Bedrock credentials if using Claude for generation: see `.env.example`
 
 ---
 
@@ -88,13 +88,13 @@ Supported formats: PDF (text-based or scanned via OCR) and TXT.
 ## Other scripts
 
 ```bash
-# Interactive retrieval — naive vector search
+# Interactive retrieval: naive vector search
 python scripts/retrieve.py
 
-# Interactive retrieval — hybrid BM25 + vector + reranking
+# Interactive retrieval: hybrid BM25 + vector + reranking
 python scripts/hybrid_retrieve.py
 
-# Interactive generation — choose ollama or claude
+# Interactive generation: choose ollama or claude
 python scripts/generate.py
 
 # Retrieval ablation study (chunk size, overlap, top-k, embedding model)
@@ -114,7 +114,7 @@ finsight/
 │   ├── rbi/                 # RBI Master Directions (PDF, public)
 │   ├── internal_policies/   # Synthetic policy docs (TXT)
 │   └── product_notes/       # Synthetic product notes (TXT)
-├── data/                    # Generated — not committed
+├── data/                    # Generated, not committed
 │   ├── chroma_db/           # Vector store (built by embed.py)
 │   └── chunks.jsonl         # Chunked corpus (built by chunk.py)
 ├── scripts/
@@ -151,4 +151,4 @@ Run against 50 questions (30 in-corpus, 10 OOC, 10 adversarial) with Llama 3.1 8
 | p95 Latency | < 3s | 17.5s ❌ | 25.3s ❌ | 4.3s ❌ | 9.4s ❌ |
 | Cost per Query | Logged | $0.00 | $0.00 | $0.00305 | ~$0.00305 |
 
-Faithfulness is below target for all runs — both models add background context not directly in the retrieved chunks. The fix is a post-generation verification step. HyDE improves MRR marginally (+0.005) but roughly doubles latency — not worth it at this corpus size.
+Faithfulness is below target for all runs: both models add background context not directly in the retrieved chunks. The fix is a post-generation verification step. HyDE improves MRR marginally (+0.005) but roughly doubles latency, not worth it at this corpus size.
