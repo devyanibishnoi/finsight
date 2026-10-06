@@ -1,0 +1,10 @@
+corpus/
+scripts/
+app/
+data/
+eval/
+venv/
+.venv/
+__pycache__/
+requirements.txt
+.env.example

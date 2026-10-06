@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A from-scratch RAG system for neobanking compliance Q&A: hybrid retrieval, reranking, guardrails, and measured eval results." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="FinSight" />
+<meta property="og:description" content="A from-scratch RAG system for neobanking compliance Q&A: hybrid retrieval, reranking, guardrails, and measured eval results." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="FinSight" />
+<meta name="twitter:description" content="A from-scratch RAG system for neobanking compliance Q&A: hybrid retrieval, reranking, guardrails, and measured eval results." />
+<title>FinSight</title>
+<style>
+  :root {
+    --bg:        #0c0c0e;
+    --bg-raised: #141416;
+    --ink:       #efece4;
+    --ink-soft:  #a39d91;
+    --ink-faint: #8a8578;
+    --line:      #242321;
+    --accent:    #dd8b3c;
+    --s-rewrite: #6e85b7;
+    --s-bm25:    #4f9e8a;
+    --s-vector:  #8b76c4;
+    --s-fuse:    #dd8b3c;
+    --s-guard:   #c0614f;
+    --s-gen:     #efece4;
+    --good:      #6fae6a;
+    --bad:       #c0614f;
+    --font-display: Charter, Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-mono:    ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+  .prose { max-width: 640px; }
+
+  em { color: var(--accent); font-style: italic; }
+
+  /* ---------- byline ---------- */
+
+  .byline-row { padding: 28px 0 0; }
+  .byline {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .byline .tick { display: inline-block; width: 14px; height: 1px; background: var(--ink-faint); }
+
+  /* ---------- bracket links ---------- */
+
+  .bracket-links { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+  .bracket-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+  .bracket-link .br { color: var(--ink-faint); }
+  .bracket-link:hover { color: var(--accent); }
+  .bracket-link:hover .br { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    padding: 64px 0 36px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  .dek {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 0 28px;
+  }
+  .dek code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--ink);
+  }
+
+  .hero-chart { text-align: center; }
+  .hero-chart svg { width: 100%; height: auto; max-width: 360px; }
+  .hero-chart figcaption {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .hero-chart figcaption b { color: var(--accent); font-weight: 600; }
+
+  /* ---------- stat strip ---------- */
+
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line);
+    margin: 8px 0 72px;
+  }
+  .stat-cell {
+    padding: 22px 22px;
+    border-right: 1px solid var(--line);
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-num .unit { font-size: 0.6em; color: var(--ink-soft); font-family: var(--font-body); font-weight: 400; margin-left: 2px; }
+  .stat-label {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+  @media (max-width: 640px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-cell:nth-child(2) { border-right: none; }
+    .stat-cell:nth-child(3), .stat-cell:nth-child(4) { border-top: 1px solid var(--line); }
+  }
+
+  /* ---------- demo card ---------- */
+
+  .demo-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 28px 24px;
+    margin-top: 26px;
+  }
+  .demo-q {
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .demo-q::before { content: "Q  "; color: var(--accent); }
+  .demo-a { font-size: 0.98rem; line-height: 1.7; color: var(--ink); margin: 0; }
+  .cite {
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .demo-sources {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .demo-meta {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- sections ---------- */
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 16px;
+  }
+  .eyebrow .dot { color: var(--accent); font-size: 1.1em; line-height: 1; }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    line-height: 1.25;
+    margin: 0 0 20px;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+
+  p { margin: 0 0 18px; color: var(--ink-soft); }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* ---------- stage strip ---------- */
+
+  .stage-strip {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    margin: 8px 0 12px;
+    padding-bottom: 10px;
+  }
+  .stage-card {
+    flex: 0 0 158px;
+    border-top: 3px solid var(--stage-color, var(--accent));
+    background: var(--bg-raised);
+    padding: 16px 16px 18px;
+    margin-right: 2px;
+  }
+  .stage-card .s-label {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .stage-card .s-detail {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+  .stage-arrow {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+  }
+
+  /* ---------- why columns ---------- */
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    margin-top: 40px;
+  }
+  @media (max-width: 700px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .why-col p { margin-bottom: 0; font-size: 0.95rem; }
+
+  /* ---------- eval table ---------- */
+
+  .table-wrap { overflow-x: auto; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; min-width: 600px; }
+  thead th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 10px 10px;
+    white-space: nowrap;
+  }
+  thead th.num, tbody td.num { text-align: right; }
+  tbody td {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  tbody td.num { font-family: var(--font-mono); }
+  tbody tr:last-child td { border-bottom: none; }
+  .pass { color: var(--good); }
+  .fail { color: var(--bad); }
+  .metric-name { font-weight: 600; white-space: normal; }
+  .metric-target { color: var(--ink-faint); font-family: var(--font-mono); font-size: 0.8rem; }
+
+  /* ---------- engineering notes ---------- */
+
+  .notes { margin-top: 8px; }
+  .note-entry { padding: 26px 0; border-top: 1px solid var(--line); }
+  .note-entry:first-child { border-top: none; padding-top: 0; }
+  .note-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    color: var(--tag-color);
+    background: color-mix(in srgb, var(--tag-color) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tag-color) 35%, transparent);
+  }
+  .note-entry h3 {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 8px;
+    max-width: 50ch;
+  }
+  .note-entry p { margin: 0; max-width: 62ch; font-size: 0.95rem; }
+
+  /* ---------- card grid ---------- */
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 8px;
+  }
+  @media (max-width: 760px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .card-grid { grid-template-columns: 1fr; } }
+  .mini-card { background: var(--bg); padding: 20px 20px 22px; }
+  .mini-card h4 { font-size: 0.92rem; font-weight: 700; color: var(--ink); margin: 0 0 7px; }
+  .mini-card p { font-size: 0.85rem; margin: 0; }
+  .mini-card .ref { display: block; margin-top: 10px; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-faint); }
+
+  /* ---------- plain rows ---------- */
+
+  .plain-list { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .plain-list li {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 13px 0; border-bottom: 1px solid var(--line);
+  }
+  .plain-list .item { font-weight: 600; color: var(--ink); }
+  .plain-list .count { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); }
+  .plain-list .desc { flex-basis: 100%; font-size: 0.86rem; color: var(--ink-faint); }
+
+  .chip-line { font-size: 0.95rem; color: var(--ink-soft); }
+  .chip-line code { font-family: var(--font-mono); font-size: 0.86em; color: var(--ink); background: var(--bg-raised); border: 1px solid var(--line); padding: 1px 6px; border-radius: 3px; }
+
+  /* ---------- footer ---------- */
+
+  footer { padding: 48px 0 72px; }
+  footer .colophon { font-size: 0.88rem; color: var(--ink-faint); max-width: 56ch; margin-bottom: 24px; }
+  footer .colophon a { color: var(--ink-soft); text-decoration-color: var(--line); }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 20px; }
+    h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="byline-row">
+    <span class="byline"><span class="tick"></span> Devyani Bishnoi</span>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Answers that cite their source, or <em>refuse</em> to guess.</h1>
+      <p class="dek">FinSight is a retrieval-augmented generation system for neobanking compliance questions: UPI limits, KYC rules, dispute SLAs, RBI directions. No <code>LangChain</code>, no <code>LlamaIndex</code>. The retrieval, reranking, and guardrail logic are written and measured by hand, against a 50-question eval set built for this corpus.</p>
+      <div class="bracket-links">
+        <a class="bracket-link" href="https://github.com/devyanibishnoi/finsight"><span class="br">[</span> View source <span class="br">]</span></a>
+        <a class="bracket-link" href="#architecture"><span class="br">[</span> How it works <span class="br">]</span></a>
+        <a class="bracket-link" href="#eval"><span class="br">[</span> See the eval numbers <span class="br">]</span></a>
+      </div>
+    </div>
+
+    <figure class="hero-chart">
+      <svg viewBox="0 0 360 200" role="img" aria-label="Diagram of two independent search rankings, keyword and vector, converging into a single fused ranking.">
+        <g stroke="var(--line)" stroke-width="1">
+          <line x1="40" y1="10" x2="40" y2="190" />
+          <line x1="110" y1="10" x2="110" y2="190" />
+          <line x1="190" y1="10" x2="190" y2="190" />
+          <line x1="265" y1="10" x2="265" y2="190" />
+          <line x1="340" y1="10" x2="340" y2="190" />
+        </g>
+        <path d="M20,40 Q110,40 190,108" fill="none" stroke="var(--s-bm25)" stroke-width="2" />
+        <path d="M20,168 Q110,168 190,108" fill="none" stroke="var(--s-vector)" stroke-width="2" />
+        <path d="M190,108 Q265,96 340,88" fill="none" stroke="var(--accent)" stroke-width="2.4" />
+        <circle cx="190" cy="108" r="3.5" fill="var(--accent)" />
+        <circle cx="20" cy="40" r="3" fill="var(--s-bm25)" />
+        <circle cx="20" cy="168" r="3" fill="var(--s-vector)" />
+        <text x="24" y="30" font-family="var(--font-mono)" font-size="10" fill="var(--s-bm25)">BM25</text>
+        <text x="24" y="185" font-family="var(--font-mono)" font-size="10" fill="var(--s-vector)">vector</text>
+        <text x="335" y="80" font-family="var(--font-mono)" font-size="10" fill="var(--accent)" text-anchor="end">fused</text>
+      </svg>
+      <figcaption>Two rankings, <b>one fused list</b></figcaption>
+    </figure>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-cell"><div class="stat-num">100<span class="unit">%</span></div><div class="stat-label">Hit@5</div></div>
+    <div class="stat-cell"><div class="stat-num">0.88</div><div class="stat-label">MRR@10</div></div>
+    <div class="stat-cell"><div class="stat-num">100<span class="unit">%</span></div><div class="stat-label">OOC refusal rate</div></div>
+    <div class="stat-cell"><div class="stat-num">29</div><div class="stat-label">source documents</div></div>
+  </div>
+
+  <section id="demo">
+    <p class="eyebrow"><span class="dot">&bull;</span> Sample output</p>
+    <h2>What an answer actually looks like.</h2>
+    <p class="prose">There's no hosted live demo, the stack needs a local Ollama instance and a persistent vector store, neither of which run on serverless. What's below is real: the question, the cited chunk IDs, and the rerank scores all came from an actual run against the corpus in this repo.</p>
+
+    <div class="demo-card">
+      <div class="demo-q">What's the daily UPI limit for a fully KYC-verified customer?</div>
+      <p class="demo-a">For a Tier 2 (fully KYC-verified) customer, the standard daily UPI limit is &#8377;1,00,000, with no monthly cap subject to account balance <span class="cite">[1]</span>. This is enhanced to &#8377;2,00,000 per transaction for healthcare, education, and insurance-premium payments, provided the merchant carries the correct category code <span class="cite">[2]</span>. Accounts opened in the last 24 hours are held to a &#8377;10,000/day cooling-period cap regardless of KYC tier <span class="cite">[3]</span>.</p>
+      <div class="demo-sources">
+        <div><span class="cite">[1]</span> upi_limit_policy_0002 &middot; rerank score 0.91</div>
+        <div><span class="cite">[2]</span> upi_limit_policy_0003 &middot; rerank score 0.87</div>
+        <div><span class="cite">[3]</span> upi_limit_policy_0004 &middot; rerank score 0.83</div>
+      </div>
+      <div class="demo-meta">llama 3.1 8b &middot; 4.1s &middot; not cached</div>
+    </div>
+  </section>
+
+  <section id="problem">
+    <p class="eyebrow"><span class="dot">&bull;</span> The problem</p>
+    <h2>A wrong banking answer isn't a bad UX. It's a compliance incident.</h2>
+    <div class="prose">
+      <p>A support assistant that confidently states the wrong UPI limit, or invents a KYC exception that doesn't exist, isn't just unhelpful, it's a liability for a regulated business. FinSight is built around one constraint: never state a policy fact without the exact chunk that supports it, and when nothing in the corpus supports an answer, say so instead of guessing.</p>
+      <p>That constraint shapes everything downstream: what gets retrieved, how it gets reranked, and the score threshold that decides whether a model gets called at all.</p>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <p class="eyebrow"><span class="dot">&bull;</span> Architecture</p>
+    <h2>Six stages, each one a checkpoint it can fail.</h2>
+    <p class="prose">A question is rewritten if it looks like a follow-up, retrieved two different ways, fused, reranked, and gated against the corpus, and only then handed to a model. Any of the first few steps can end the request before a model is ever called.</p>
+
+    <div class="stage-strip">
+      <div class="stage-card" style="--stage-color: var(--s-rewrite)">
+        <div class="s-label">Rewrite</div>
+        <div class="s-detail">Follow-up detection<br/>via Ollama</div>
+      </div>
+      <div class="stage-arrow">&rarr;</div>
+      <div class="stage-card" style="--stage-color: var(--s-bm25)">
+        <div class="s-label">BM25</div>
+        <div class="s-detail">Keyword search<br/>top 20</div>
+      </div>
+      <div class="stage-arrow">&rarr;</div>
+      <div class="stage-card" style="--stage-color: var(--s-vector)">
+        <div class="s-label">Vector</div>
+        <div class="s-detail">bge-small-en-v1.5<br/>top 20</div>
+      </div>
+      <div class="stage-arrow">&rarr;</div>
+      <div class="stage-card" style="--stage-color: var(--s-fuse)">
+        <div class="s-label">Fuse + rerank</div>
+        <div class="s-detail">RRF (k=60), then<br/>cross-encoder, top 5</div>
+      </div>
+      <div class="stage-arrow">&rarr;</div>
+      <div class="stage-card" style="--stage-color: var(--s-guard)">
+        <div class="s-label">Guardrail</div>
+        <div class="s-detail">Refuse if top score<br/>&lt; 0.50</div>
+      </div>
+      <div class="stage-arrow">&rarr;</div>
+      <div class="stage-card" style="--stage-color: var(--s-gen)">
+        <div class="s-label">Generate</div>
+        <div class="s-detail">Llama 3.1 8B or<br/>Claude Haiku</div>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-col">
+        <div class="why-label">Why hybrid, not just vector</div>
+        <p>Dense retrieval misses exact terms it hasn't learned to associate, like a specific NPCI circular number. BM25 catches those verbatim; Reciprocal Rank Fusion means a strong match in either method survives even if the other misses it entirely.</p>
+      </div>
+      <div class="why-col">
+        <div class="why-label">Why a score gate, not just a prompt</div>
+        <p>Telling a model to refuse out-of-corpus questions in its system prompt isn't reliable on its own. A hard threshold on the top retrieved chunk's score refuses before generation runs at all, which is most of why the refusal rate holds at 100%.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="eval">
+    <p class="eyebrow"><span class="dot">&bull;</span> Evaluation</p>
+    <h2>Measured against 50 held-out questions.</h2>
+    <p class="prose">Thirty in-corpus, ten out-of-corpus, ten adversarial, run against both models with and without HyDE query expansion.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Target</th>
+            <th class="num">Llama</th>
+            <th class="num">Llama + HyDE</th>
+            <th class="num">Claude</th>
+            <th class="num">Claude + HyDE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="metric-name">Hit@5</td>
+            <td class="metric-target">&ge; 80%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+          </tr>
+          <tr>
+            <td class="metric-name">MRR@10</td>
+            <td class="metric-target">&ge; 0.65</td>
+            <td class="num pass">0.878</td>
+            <td class="num pass">0.883</td>
+            <td class="num pass">0.878</td>
+            <td class="num pass">0.883</td>
+          </tr>
+          <tr>
+            <td class="metric-name">OOC refusal rate</td>
+            <td class="metric-target">&ge; 95%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+            <td class="num pass">100.0%</td>
+          </tr>
+          <tr>
+            <td class="metric-name">Citation accuracy</td>
+            <td class="metric-target">&ge; 90%</td>
+            <td class="num pass">92.0%</td>
+            <td class="num pass">90.0%</td>
+            <td class="num pass">90.0%</td>
+            <td class="num fail">88.7%</td>
+          </tr>
+          <tr>
+            <td class="metric-name">Faithfulness (RAGAS)</td>
+            <td class="metric-target">&ge; 0.85</td>
+            <td class="num fail">0.615</td>
+            <td class="num fail">0.633</td>
+            <td class="num fail">0.673</td>
+            <td class="num fail">0.677</td>
+          </tr>
+          <tr>
+            <td class="metric-name">Answer relevance (RAGAS)</td>
+            <td class="metric-target">&ge; 0.80</td>
+            <td class="num pass">0.835</td>
+            <td class="num pass">0.809</td>
+            <td class="num pass">0.867</td>
+            <td class="num pass">0.888</td>
+          </tr>
+          <tr>
+            <td class="metric-name">p95 latency</td>
+            <td class="metric-target">&lt; 3s</td>
+            <td class="num fail">17.5s</td>
+            <td class="num fail">25.3s</td>
+            <td class="num fail">4.3s</td>
+            <td class="num fail">9.4s</td>
+          </tr>
+          <tr>
+            <td class="metric-name">Cost per query</td>
+            <td class="metric-target">logged</td>
+            <td class="num">$0.00</td>
+            <td class="num">$0.00</td>
+            <td class="num">$0.00305</td>
+            <td class="num">~$0.00305</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="notes">
+    <p class="eyebrow"><span class="dot">&bull;</span> Engineering notes</p>
+    <h2>What the numbers actually say.</h2>
+
+    <div class="notes">
+      <div class="note-entry">
+        <span class="note-tag" style="--tag-color: var(--bad)">Known gap</span>
+        <h3>Faithfulness sits below target in every configuration tested.</h3>
+        <p>Both models occasionally add background context that isn't directly in the retrieved chunks: correct in substance, but not strictly grounded. The hallucination verifier catches some of this after the fact, but it runs offline; it doesn't block a live answer.</p>
+      </div>
+      <div class="note-entry">
+        <span class="note-tag" style="--tag-color: var(--accent)">Tradeoff</span>
+        <h3>HyDE wasn't worth doubling latency for +0.005 MRR.</h3>
+        <p>Query expansion via a hypothetical document embedding moved MRR@10 from 0.878 to 0.883, a marginal gain, while roughly doubling end-to-end latency on both models. Not worth it at this corpus size; it stays in the repo as an eval flag, not the default path.</p>
+      </div>
+      <div class="note-entry">
+        <span class="note-tag" style="--tag-color: var(--good)">What's next</span>
+        <h3>A post-generation check that flags unsupported sentences.</h3>
+        <p>The fix for the faithfulness gap isn't better retrieval, retrieval is already at 100% Hit@5, it's a cheap verification pass after generation that strips or flags claims the hallucination verifier can't trace back to a chunk, before the answer reaches a user.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="supporting">
+    <p class="eyebrow"><span class="dot">&bull;</span> Also in the request path</p>
+    <h2>The parts that don't show up in the eval table.</h2>
+
+    <div class="card-grid">
+      <div class="mini-card">
+        <h4>Response caching</h4>
+        <p>Identical question and model pairs within a one-hour window return instantly from SQLite instead of re-running retrieval and generation.</p>
+        <span class="ref">app/app.py :: get_cached</span>
+      </div>
+      <div class="mini-card">
+        <h4>Follow-up rewriting</h4>
+        <p>Pronoun-heavy or short questions get rewritten into a standalone query from recent conversation history before retrieval runs.</p>
+        <span class="ref">app/app.py :: rewrite_question</span>
+      </div>
+      <div class="mini-card">
+        <h4>Dual-model generation</h4>
+        <p>The same retrieved context goes to a local Llama 3.1 8B via Ollama or Claude Haiku via AWS Bedrock, so cost and latency are directly comparable.</p>
+        <span class="ref">scripts/generate.py</span>
+      </div>
+      <div class="mini-card">
+        <h4>Hallucination verifier</h4>
+        <p>An offline checker pairs each generated claim with the chunk it cites and asks whether that chunk actually supports it.</p>
+        <span class="ref">scripts/guardrails.py --hall</span>
+      </div>
+      <div class="mini-card">
+        <h4>Retrieval ablation harness</h4>
+        <p>A standalone script sweeps chunk size, overlap, top-k, and embedding model against the eval set to justify every retrieval parameter.</p>
+        <span class="ref">scripts/ablation.py</span>
+      </div>
+      <div class="mini-card">
+        <h4>Query logging</h4>
+        <p>Every request, cached or not, is logged to SQLite and a JSONL trace file with its retrieved chunks and scores for later review.</p>
+        <span class="ref">app/app.py :: log_query</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="corpus">
+    <p class="eyebrow"><span class="dot">&bull;</span> Corpus</p>
+    <h2>29 documents, three registers of truth.</h2>
+    <p class="prose">Real regulation, synthetic policy, synthetic product notes, deliberately mixed so retrieval has to tell an RBI clause apart from an internal interpretation of it.</p>
+
+    <ul class="plain-list">
+      <li>
+        <span class="item">RBI Master Directions</span>
+        <span class="count">4 PDFs</span>
+        <span class="desc">Public regulatory text: KYC, Prepaid Payment Instruments, Digital Lending, UPI guidelines, from rbi.org.in.</span>
+      </li>
+      <li>
+        <span class="item">Internal policies</span>
+        <span class="count">15 TXT, synthetic</span>
+        <span class="desc">Transaction limits, KYC re-verification, dispute SLAs, fee schedules, nominee management.</span>
+      </li>
+      <li>
+        <span class="item">Product notes</span>
+        <span class="count">10 TXT, synthetic</span>
+        <span class="desc">Fraud holds, failed-transaction exceptions, onboarding quirks, API downtime handling.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="stack">
+    <p class="eyebrow"><span class="dot">&bull;</span> Stack</p>
+    <h2>No retrieval framework, on purpose.</h2>
+    <p class="chip-line">Python 3.11, Flask, ChromaDB, <code>rank_bm25</code>, <code>bge-small-en-v1.5</code> for embeddings, <code>ms-marco-MiniLM-L-6-v2</code> for reranking, Ollama running Llama 3.1 8B locally, AWS Bedrock for Claude Haiku, RAGAS for the eval harness, SQLite for logs and caching, and a React UI loaded from a CDN with no build step. Chunking, embedding, fusion, reranking, and caching are each a few hundred lines, small enough to read end to end.</p>
+  </section>
+
+  <footer>
+    <div class="bracket-links" style="margin-bottom: 22px;">
+      <a class="bracket-link" href="https://github.com/devyanibishnoi/finsight"><span class="br">[</span> Source on GitHub <span class="br">]</span></a>
+      <a class="bracket-link" href="https://github.com/devyanibishnoi"><span class="br">[</span> More projects <span class="br">]</span></a>
+    </div>
+    <p class="colophon">FinSight is a personal project built to go deep on retrieval, not to ship a product. Every eval number above comes from <code style="font-family: var(--font-mono);">scripts/ablation.py</code> and <code style="font-family: var(--font-mono);">scripts/guardrails.py</code> in the repo; re-run them against your own corpus.</p>
+  </footer>
+
+</div>
+</body>
+</html>
